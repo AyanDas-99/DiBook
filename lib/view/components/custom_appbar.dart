@@ -1,7 +1,7 @@
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/title.dart';
-import 'package:dibook/view/theme/ThemeConstants.dart';
+import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -34,7 +34,7 @@ PreferredSizeWidget customAppbar() => PreferredSize(
               } else {
                 return Text(
                   user.name,
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 );
               }
             },
@@ -49,16 +49,16 @@ PreferredSizeWidget customAppbar() => PreferredSize(
               ))
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(10),
+          preferredSize: const Size.fromHeight(10),
           child: Column(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                padding: EdgeInsets.symmetric(horizontal: 5),
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+                padding: const EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                child: TextField(
+                child: const TextField(
                   decoration: InputDecoration(
                       icon: Icon(Icons.search), border: InputBorder.none),
                 ),
@@ -71,12 +71,12 @@ PreferredSizeWidget customAppbar() => PreferredSize(
                   child: Consumer(builder: (context, ref, child) {
                     final user = ref.watch(userProvider);
                     if (user == null) {
-                      return Text(
+                      return const Text(
                         "Login to pick a delivery address",
                         style: TextStyle(color: Colors.white),
                       );
                     }
-                    return Text(
+                    return const Text(
                       "Showing user delivery address",
                       style: TextStyle(color: Colors.white),
                     );

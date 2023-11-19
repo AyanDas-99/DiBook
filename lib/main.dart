@@ -2,7 +2,7 @@ import 'package:dibook/state/auth/providers/auth_state_provider.dart';
 import 'package:dibook/state/providers/is_loading.dart';
 import 'package:dibook/view/components/overlay_loading.dart';
 import 'package:dibook/view/main_view.dart';
-import 'package:dibook/view/theme/ThemeConstants.dart';
+import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -41,7 +41,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             }
           });
 
-          return MainView();
+          return const MainView();
         },
       ),
     );

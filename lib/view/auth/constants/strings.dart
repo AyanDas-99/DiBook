@@ -6,7 +6,7 @@ class Strings {
   static String password = "Password";
   static String or = "Or";
   static String signIn = "Sign In";
-  static String SignWithGoogle = "Sign in with Google";
+  static String signWithGoogle = "Sign in with Google";
 
   const Strings._();
 }

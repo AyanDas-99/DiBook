@@ -35,7 +35,6 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
         body: user.toJson(),
         headers: Constants.contentType,
       );
-      print(jsonDecode(res.body));
       if (context.mounted) {
         httpErrorHandler(
             context: context,
@@ -82,7 +81,7 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
               ref.read(userProvider.notifier).update((state) => user);
               LocalStorage.storeToken(response['token']);
               Navigator.of(context).pop(MaterialPageRoute(
-                builder: (context) => MainView(),
+                builder: (context) => const MainView(),
               ));
               showSnackBar(context, "Signed in");
             });

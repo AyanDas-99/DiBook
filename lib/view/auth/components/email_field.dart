@@ -1,5 +1,5 @@
 import 'package:dibook/view/auth/constants/strings.dart';
-import 'package:dibook/view/components/defaultTextField.dart';
+import 'package:dibook/view/components/default_textfield.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 

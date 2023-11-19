@@ -1,4 +1,4 @@
-import 'package:dibook/view/theme/ThemeConstants.dart';
+import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
 class MainButton extends StatelessWidget {

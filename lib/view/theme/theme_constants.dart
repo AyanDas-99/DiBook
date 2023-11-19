@@ -5,13 +5,14 @@ class ThemeConstants {
     useMaterial3: true,
     fontFamily: 'Roboto',
     scaffoldBackgroundColor: lightYellow,
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: darkGreen,
-        type: BottomNavigationBarType.fixed,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedIconTheme: IconThemeData(color: Colors.white),
-        unselectedIconTheme: IconThemeData(color: Colors.white)),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: darkGreen,
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+      iconTheme: const MaterialStatePropertyAll(
+        IconThemeData(color: Colors.white),
+      ),
+      indicatorColor: Colors.transparent,
+    ),
   );
 
   static Color darkGreen = const Color.fromRGBO(101, 131, 97, 1);

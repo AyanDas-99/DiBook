@@ -1,12 +1,11 @@
 import 'package:dibook/state/auth/providers/auth_state_provider.dart';
-import 'package:dibook/state/utils/show_snack_bar.dart';
 import 'package:dibook/view/auth/components/email_field.dart';
 import 'package:dibook/view/auth/components/name_field.dart';
 import 'package:dibook/view/auth/components/password_field.dart';
 import 'package:dibook/view/components/title.dart';
 import 'package:dibook/view/auth/constants/strings.dart';
-import 'package:dibook/view/components/MainButton.dart';
-import 'package:dibook/view/theme/ThemeConstants.dart';
+import 'package:dibook/view/components/main_button.dart';
+import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable_widgets/expandable_widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,7 +43,7 @@ class AuthScreenView extends StatelessWidget {
                     Expandable(
                       centralizeFirstChild: false,
                       backgroundColor: ThemeConstants.lightYellow,
-                      boxShadow: [],
+                      boxShadow: const [],
                       firstChild: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: Text(
@@ -95,7 +94,7 @@ class AuthScreenView extends StatelessWidget {
                       initiallyExpanded: true,
                       centralizeFirstChild: false,
                       backgroundColor: ThemeConstants.lightYellow,
-                      boxShadow: [],
+                      boxShadow: const [],
                       firstChild: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: Text(
@@ -153,7 +152,7 @@ class AuthScreenView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            Strings.SignWithGoogle,
+                            Strings.signWithGoogle,
                             style: const TextStyle(color: Colors.white),
                           ),
                           const SizedBox(
