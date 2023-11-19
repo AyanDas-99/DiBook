@@ -4,11 +4,13 @@ import 'dart:convert';
 class User {
   final String name;
   final String email;
+  final String password;
   final String token;
 
   User({
     required this.name,
     required this.email,
+    required this.password,
     required this.token,
   });
 
@@ -16,6 +18,7 @@ class User {
     return <String, dynamic>{
       'name': name,
       'email': email,
+      'password': password,
       'token': token,
     };
   }
@@ -25,6 +28,7 @@ class User {
       name: map['name'] as String,
       email: map['email'] as String,
       token: map['token'] as String,
+      password: map['password'] as String,
     );
   }
 
@@ -41,5 +45,6 @@ class User {
   int get hashCode => Object.hashAll([
         name,
         email,
+        password,
       ]);
 }

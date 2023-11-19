@@ -1,4 +1,8 @@
-import 'package:dibook/view/components/defaultTextField.dart';
+import 'package:dibook/state/auth/providers/auth_state_provider.dart';
+import 'package:dibook/state/utils/show_snack_bar.dart';
+import 'package:dibook/view/auth/components/email_field.dart';
+import 'package:dibook/view/auth/components/name_field.dart';
+import 'package:dibook/view/auth/components/password_field.dart';
 import 'package:dibook/view/components/title.dart';
 import 'package:dibook/view/auth/constants/strings.dart';
 import 'package:dibook/view/components/MainButton.dart';
@@ -6,13 +10,20 @@ import 'package:dibook/view/theme/ThemeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:expandable_widgets/expandable_widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class AuthScreen extends StatelessWidget {
-  AuthScreen({super.key});
+class AuthScreenView extends StatelessWidget {
+  AuthScreenView({super.key});
 
   final TextEditingController nameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
+  final _signUpFormKey = GlobalKey<FormState>();
+
+  final _signInFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +38,9 @@ class AuthScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 20),
+                    const Spacer(),
                     const LogoTitle(),
-                    Spacer(),
+                    const Spacer(),
                     Expandable(
                       centralizeFirstChild: false,
                       backgroundColor: ThemeConstants.lightYellow,
@@ -45,29 +56,36 @@ class AuthScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      secondChild: Column(
-                        children: [
-                          const SizedBox(height: 20),
-                          DefaultTextField(
-                            controller: nameController,
-                            placeHolder: Strings.name,
-                          ),
-                          const SizedBox(height: 20),
-                          DefaultTextField(
-                            controller: emailController,
-                            placeHolder: Strings.email,
-                          ),
-                          const SizedBox(height: 20),
-                          DefaultTextField(
-                            controller: passwordController,
-                            placeHolder: Strings.password,
-                          ),
-                          const SizedBox(height: 20),
-                          MainButton(
-                            text: Strings.signUp,
-                            onPressed: () {},
-                          ),
-                        ],
+                      secondChild: Form(
+                        key: _signUpFormKey,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            NameField(controller: nameController),
+                            const SizedBox(height: 20),
+                            EmailField(controller: emailController),
+                            const SizedBox(height: 20),
+                            PasswordField(controller: passwordController),
+                            const SizedBox(height: 20),
+                            Consumer(builder: (context, ref, child) {
+                              return MainButton(
+                                text: Strings.signUp,
+                                onPressed: () {
+                                  if (_signUpFormKey.currentState!.validate()) {
+                                    ref
+                                        .read(authStateProvider.notifier)
+                                        .signUpWithEmail(
+                                          context: context,
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          password: passwordController.text,
+                                        );
+                                  }
+                                },
+                              );
+                            }),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -89,25 +107,33 @@ class AuthScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      secondChild: Column(
-                        children: [
-                          const SizedBox(height: 20),
-                          const SizedBox(height: 20),
-                          DefaultTextField(
-                            controller: emailController,
-                            placeHolder: Strings.email,
-                          ),
-                          const SizedBox(height: 20),
-                          DefaultTextField(
-                            controller: passwordController,
-                            placeHolder: Strings.password,
-                          ),
-                          const SizedBox(height: 20),
-                          MainButton(
-                            text: Strings.signIn,
-                            onPressed: () {},
-                          ),
-                        ],
+                      secondChild: Form(
+                        key: _signInFormKey,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            const SizedBox(height: 20),
+                            EmailField(controller: emailController),
+                            const SizedBox(height: 20),
+                            PasswordField(controller: passwordController),
+                            const SizedBox(height: 20),
+                            Consumer(builder: (context, ref, child) {
+                              return MainButton(
+                                text: Strings.signIn,
+                                onPressed: () {
+                                  if (_signInFormKey.currentState!.validate()) {
+                                    ref
+                                        .read(authStateProvider.notifier)
+                                        .signInWithEmail(
+                                            context: context,
+                                            email: emailController.text,
+                                            password: passwordController.text);
+                                  }
+                                },
+                              );
+                            }),
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -140,7 +166,9 @@ class AuthScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Spacer(),
+                    const Spacer(
+                      flex: 3,
+                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
