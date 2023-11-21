@@ -1,15 +1,27 @@
+import 'package:dibook/state/auth/providers/auth_state_provider.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/main_button.dart';
 import 'package:dibook/view/components/rounded_container.dart';
+import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
 import 'package:dibook/view/profile/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileView extends ConsumerWidget {
   const ProfileView({super.key});
+
+  void logout(BuildContext context, WidgetRef ref) async {
+    final confirm = await ConfirmDialog.show(
+        context: context, content: "Are you sure you want to log out?");
+    if (confirm == true) {
+      if (context.mounted) {
+        ref.read(authStateProvider.notifier).logout(context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,12 +76,19 @@ class ProfileView extends ConsumerWidget {
                         ],
                       ),
                       const Divider(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(Constants.sellABook),
-                          const Icon(Icons.arrow_right)
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => AddNewBookView(),
+                          ));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(Constants.sellABook),
+                            const Icon(Icons.arrow_right)
+                          ],
+                        ),
                       ),
                       const Divider(),
                       Row(
@@ -89,12 +108,7 @@ class ProfileView extends ConsumerWidget {
                       ),
                       const Divider(),
                       InkWell(
-                        onTap: () async {
-                          final confirm = await ConfirmDialog.show(
-                              context: context,
-                              content: "Are you sure you want to log out?");
-                          print(confirm);
-                        },
+                        onTap: () => logout(context, ref),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

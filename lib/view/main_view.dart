@@ -27,22 +27,19 @@ class _MainViewState extends State<MainView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: customAppbar(),
-        body: items[currentPage][2] as Widget,
-        bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (value) {
-            setState(() {
-              currentPage = value;
-            });
-          },
-          selectedIndex: currentPage,
-          destinations: items
-              .map((item) =>
-                  NavigationDestination(icon: item[1], label: item[0]))
-              .toList(),
-        ),
+    return Scaffold(
+      appBar: customAppbar(),
+      body: items[currentPage][2] as Widget,
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (value) {
+          setState(() {
+            currentPage = value;
+          });
+        },
+        selectedIndex: currentPage,
+        destinations: items
+            .map((item) => NavigationDestination(icon: item[1], label: item[0]))
+            .toList(),
       ),
     );
   }

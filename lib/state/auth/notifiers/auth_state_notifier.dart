@@ -97,6 +97,7 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
   void signInWithToken(BuildContext context) async {
     try {
       final token = await LocalStorage.getToken();
+      print(token);
       if (token == null) {
         return;
       }
@@ -122,6 +123,17 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
               ref.read(userProvider.notifier).update((state) => user);
             });
       }
+    } catch (e) {
+      if (context.mounted) {
+        showSnackBar(context, e.toString());
+      }
+    }
+  }
+
+  void logout(BuildContext context) async {
+    try {
+      await LocalStorage.deleteToken();
+      ref.read(userProvider.notifier).state = null;
     } catch (e) {
       if (context.mounted) {
         showSnackBar(context, e.toString());
