@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dibook/state/books/strings/book_keys.dart';
 
@@ -9,11 +8,11 @@ class Book {
   final String name;
   final String description;
   final String category;
-  final double mrp;
+  final int mrp;
   final int stock;
-  final List<File> images;
+  final List<String> images;
   final double rating;
-  final double price;
+  final int price;
 
   Book(this.bookId,
       {required this.name,
@@ -39,24 +38,24 @@ class Book {
     };
   }
 
-  factory Book.fromMap(String bookId, Map<String, dynamic> map) {
+  factory Book.fromMap(Map<String, dynamic> map) {
     return Book(
-      bookId,
+      map[BookKeys.bookId],
       name: map[BookKeys.name] as String,
       description: map[BookKeys.description] as String,
       category: map[BookKeys.category] as String,
-      mrp: map[BookKeys.mrp] as double,
+      mrp: map[BookKeys.mrp] as int,
       stock: map[BookKeys.stock] as int,
-      images: map[BookKeys.images] as List<File>,
-      rating: map[BookKeys.rating] as double,
-      price: map[BookKeys.price] as double,
+      images: (map[BookKeys.images] as List).map((e) => e.toString()).toList(),
+      rating: double.parse(map[BookKeys.rating].toString()),
+      price: map[BookKeys.price] as int,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Book.fromJson(String bookId, String source) =>
-      Book.fromMap(bookId, json.decode(source) as Map<String, dynamic>);
+  factory Book.fromJson(String source) =>
+      Book.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   operator ==(covariant Book other) =>

@@ -79,7 +79,7 @@ class ProfileView extends ConsumerWidget {
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => AddNewBookView(),
+                            builder: (context) => const AddNewBookView(),
                           ));
                         },
                         child: Row(

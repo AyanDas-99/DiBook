@@ -1,5 +1,6 @@
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/home/components/categories_list.dart';
+import 'package:dibook/view/home/components/product_list.dart';
 import 'package:dibook/view/home/constants/strings.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,10 @@ class HomeView extends StatelessWidget {
               const CategoriesList(),
               const SizedBox(height: 20),
               Heading(text: Strings.top, sub: true),
+              const ProductList(),
+              const SizedBox(
+                height: 100,
+              )
             ],
           ),
         ),

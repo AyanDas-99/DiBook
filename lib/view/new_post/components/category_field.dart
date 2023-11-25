@@ -3,7 +3,7 @@ import 'package:dibook/view/constants/strings.dart' as global;
 import 'package:flutter/material.dart';
 
 class CategoryField extends StatefulWidget {
-  CategoryField({super.key, required this.controller});
+  const CategoryField({super.key, required this.controller});
   final TextEditingController controller;
 
   @override

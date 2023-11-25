@@ -55,7 +55,6 @@ class BookUploadNotifier extends StateNotifier<IsLoading> {
       }
     } catch (e) {
       if (context.mounted) {
-        print(e.toString());
         showSnackBar(context, e.toString());
       }
     }

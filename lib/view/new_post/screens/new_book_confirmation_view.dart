@@ -17,7 +17,6 @@ class NewBookConfirmationView extends StatelessWidget {
     final uploaded = await ref
         .read(bookUploadNotifierProvider.notifier)
         .uploadBook(context, book);
-    print(uploaded);
     if (uploaded) {
       if (context.mounted) {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
