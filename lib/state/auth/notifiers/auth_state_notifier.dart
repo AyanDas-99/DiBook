@@ -107,7 +107,7 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
         ...Constants.contentType,
         "x-auth-token": token,
       });
-
+      print(jsonDecode(res.body));
       if (context.mounted) {
         httpErrorHandler(
             context: context,
@@ -124,9 +124,7 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
             });
       }
     } catch (e) {
-      if (context.mounted) {
-        showSnackBar(context, e.toString());
-      }
+      print(e.toString());
     }
   }
 

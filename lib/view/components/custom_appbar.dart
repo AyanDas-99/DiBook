@@ -5,53 +5,56 @@ import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-PreferredSizeWidget customAppbar() => PreferredSize(
-      preferredSize: const Size.fromHeight(170),
-      child: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: ThemeConstants.appbarGradient),
+PreferredSizeWidget customAppbar({bool showSearchBar = true}) {
+  return PreferredSize(
+    preferredSize: Size.fromHeight(showSearchBar ? 170 : 100),
+    child: AppBar(
+      automaticallyImplyLeading: !showSearchBar,
+      flexibleSpace: Container(
+        decoration: BoxDecoration(gradient: ThemeConstants.appbarGradient),
+      ),
+      title: const LogoTitle(
+        size: 30,
+        weight: FontWeight.normal,
+        color: Colors.white,
+      ),
+      actions: [
+        Consumer(
+          builder: (context, ref, child) {
+            final user = ref.watch(userProvider);
+            if (user == null) {
+              return InkWell(
+                child: const Text(
+                  "Login",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AuthScreenView()));
+                },
+              );
+            } else {
+              return Text(
+                user.name,
+                style: const TextStyle(color: Colors.white),
+              );
+            }
+          },
         ),
-        title: const LogoTitle(
-          size: 30,
-          weight: FontWeight.normal,
-          color: Colors.white,
-        ),
-        actions: [
-          Consumer(
-            builder: (context, ref, child) {
-              final user = ref.watch(userProvider);
-              if (user == null) {
-                return InkWell(
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => AuthScreenView()));
-                  },
-                );
-              } else {
-                return Text(
-                  user.name,
-                  style: const TextStyle(color: Colors.white),
-                );
-              }
+        IconButton(
+            onPressed: () {
+              // Bell icon
             },
-          ),
-          IconButton(
-              onPressed: () {
-                // Bell icon
-              },
-              icon: const Icon(
-                Icons.notifications,
-                color: Colors.white,
-              ))
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(10),
-          child: Column(
-            children: [
+            icon: const Icon(
+              Icons.notifications,
+              color: Colors.white,
+            ))
+      ],
+      bottom: PreferredSize(
+        preferredSize: const Size.fromHeight(10),
+        child: Column(
+          children: [
+            if (showSearchBar)
               Container(
                 margin: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -63,28 +66,29 @@ PreferredSizeWidget customAppbar() => PreferredSize(
                       icon: Icon(Icons.search), border: InputBorder.none),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                color: ThemeConstants.darkGreen,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Consumer(builder: (context, ref, child) {
-                    final user = ref.watch(userProvider);
-                    if (user == null) {
-                      return const Text(
-                        "Login to pick a delivery address",
-                        style: TextStyle(color: Colors.white),
-                      );
-                    }
+            Container(
+              width: double.infinity,
+              color: ThemeConstants.darkGreen,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Consumer(builder: (context, ref, child) {
+                  final user = ref.watch(userProvider);
+                  if (user == null) {
                     return const Text(
-                      "Showing user delivery address",
+                      "Login to pick a delivery address",
                       style: TextStyle(color: Colors.white),
                     );
-                  }),
-                ),
-              )
-            ],
-          ),
+                  }
+                  return const Text(
+                    "Showing user delivery address",
+                    style: TextStyle(color: Colors.white),
+                  );
+                }),
+              ),
+            )
+          ],
         ),
       ),
-    );
+    ),
+  );
+}

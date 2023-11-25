@@ -1,4 +1,5 @@
 import 'package:dibook/view/new_post/strings.dart';
+import 'package:dibook/view/constants/strings.dart' as global;
 import 'package:flutter/material.dart';
 
 class CategoryField extends StatefulWidget {
@@ -10,37 +11,37 @@ class CategoryField extends StatefulWidget {
 }
 
 class _CategoryFieldState extends State<CategoryField> {
-  String value = "";
-
-  final List<String> categories = [
-    "School",
-    "Engineering",
-    "Literature",
-    "Medical",
-    "Economy",
-    "Entrance Exam",
-    "Biography"
-  ];
+  String fieldValue = "";
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(5),
-      child: DropdownMenu(
-        inputDecorationTheme:
-            const InputDecorationTheme(border: InputBorder.none),
-        hintText: Strings.selectCategory,
-        controller: widget.controller,
-        dropdownMenuEntries: categories
-            .map((category) => DropdownMenuEntry(
-                  value: category,
-                  label: category,
+      child: DropdownButtonFormField(
+        hint: Text(Strings.selectCategory),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Select a category";
+          }
+          return null;
+        },
+        value: fieldValue.isNotEmpty ? fieldValue : null,
+        // inputDecorationTheme:
+        //     const InputDecorationTheme(border: InputBorder.none),
+        // hintText: Strings.selectCategory,
+        // controller: widget.controller,
+        items: global.Strings.categories
+            .map((e) => DropdownMenuItem(
+                  value: e,
+                  key: Key(e),
+                  child: Text(e),
                 ))
             .toList(),
-        onSelected: (a) {
+        onChanged: (a) {
           setState(() {
-            value = a!;
+            fieldValue = a!;
+            widget.controller.text = a;
           });
         },
       ),

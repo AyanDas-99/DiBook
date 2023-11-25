@@ -1,5 +1,5 @@
 import 'package:dibook/view/cart/cart_view.dart';
-import 'package:dibook/view/home/home_view.dart';
+import 'package:dibook/view/home/screens/home_view.dart';
 import 'package:dibook/view/profile/profile_view.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
 import 'package:flutter/material.dart';

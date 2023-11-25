@@ -23,5 +23,9 @@ class Strings {
   static String moreImages = "More images of your choice";
   static String clickToSelect = "Click to select images";
   static String confirm = "Confirm";
+  static String forEach = "For each of this book sold, you will get";
+  static String thePriceOf =
+      "The price of each book is calculated based on it's condition and the fact that these are all re-sold";
+  static String cancel = "Cancel";
   const Strings._();
 }

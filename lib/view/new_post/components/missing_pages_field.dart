@@ -14,7 +14,7 @@ class MissingPagesField extends StatelessWidget {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "Cannot be empty";
-        } else if (int.parse(value).isNegative || int.parse(value) == 0) {
+        } else if (int.parse(value).isNegative) {
           return "Can only be a positive number";
         }
         return null;
