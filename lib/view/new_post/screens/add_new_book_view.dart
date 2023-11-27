@@ -79,7 +79,7 @@ class _AddNewBookViewState extends State<AddNewBookView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar(showSearchBar: false),
+      appBar: customAppbar(context, showSearchBar: false),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(

@@ -28,7 +28,7 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar(),
+      appBar: customAppbar(context),
       body: items[currentPage][2] as Widget,
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (value) {

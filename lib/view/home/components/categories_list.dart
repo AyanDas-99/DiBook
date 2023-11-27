@@ -1,4 +1,5 @@
 import 'package:dibook/view/constants/strings.dart';
+import 'package:dibook/view/searched_books/category_books_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,11 @@ class CategoriesList extends StatelessWidget {
         itemCount: Strings.categories.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+                    CategoryBooksView(category: Strings.categories[index])));
+          },
           child: Container(
             width: 150,
             margin: const EdgeInsets.all(10),

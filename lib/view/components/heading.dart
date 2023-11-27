@@ -9,6 +9,7 @@ class Heading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      softWrap: true,
       style: TextStyle(
         fontSize: 20,
         fontWeight: sub ? FontWeight.w500 : FontWeight.w700,

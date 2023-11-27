@@ -1,15 +1,19 @@
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/title.dart';
+import 'package:dibook/view/searched_books/searched_books_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-PreferredSizeWidget customAppbar({bool showSearchBar = true}) {
+PreferredSizeWidget customAppbar(BuildContext context,
+    {bool showSearchBar = true, bool leading = false}) {
+  final searchController = TextEditingController();
+
   return PreferredSize(
     preferredSize: Size.fromHeight(showSearchBar ? 170 : 100),
     child: AppBar(
-      automaticallyImplyLeading: !showSearchBar,
+      automaticallyImplyLeading: leading,
       flexibleSpace: Container(
         decoration: BoxDecoration(gradient: ThemeConstants.appbarGradient),
       ),
@@ -61,9 +65,15 @@ PreferredSizeWidget customAppbar({bool showSearchBar = true}) {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: searchController,
+                  decoration: const InputDecoration(
                       icon: Icon(Icons.search), border: InputBorder.none),
+                  onSubmitted: (value) {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => SearchedBooksView(
+                            searchQuery: searchController.text)));
+                  },
                 ),
               ),
             Container(
