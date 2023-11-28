@@ -3,8 +3,8 @@ import 'package:dibook/view/home/components/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ProductList extends ConsumerWidget {
-  const ProductList({super.key});
+class AllProductList extends ConsumerWidget {
+  const AllProductList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

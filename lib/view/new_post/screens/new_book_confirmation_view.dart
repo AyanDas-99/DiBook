@@ -29,7 +29,7 @@ class NewBookConfirmationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppbar(context, showSearchBar: false),
+      appBar: customAppbar(context, showSearchBar: false, leading: true),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(

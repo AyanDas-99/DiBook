@@ -12,17 +12,28 @@ class Book {
   final int stock;
   final List<String> images;
   final double rating;
+  final double frontRating;
+  final double backRating;
+  final double markingsRating;
+  final double bindingRating;
+
   final int price;
 
-  Book(this.bookId,
-      {required this.name,
-      required this.description,
-      required this.category,
-      required this.mrp,
-      required this.stock,
-      required this.images,
-      required this.rating,
-      required this.price});
+  Book(
+    this.bookId, {
+    required this.name,
+    required this.description,
+    required this.category,
+    required this.mrp,
+    required this.stock,
+    required this.images,
+    required this.rating,
+    required this.price,
+    required this.frontRating,
+    required this.backRating,
+    required this.markingsRating,
+    required this.bindingRating,
+  });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -35,6 +46,10 @@ class Book {
       BookKeys.rating: rating,
       BookKeys.price: price,
       BookKeys.bookId: bookId,
+      BookKeys.frontRating: frontRating,
+      BookKeys.backRating: backRating,
+      BookKeys.bindingRating: bindingRating,
+      BookKeys.markingsRating: markingsRating,
     };
   }
 
@@ -48,6 +63,10 @@ class Book {
       stock: map[BookKeys.stock] as int,
       images: (map[BookKeys.images] as List).map((e) => e.toString()).toList(),
       rating: double.parse(map[BookKeys.rating].toString()),
+      frontRating: double.parse(map[BookKeys.frontRating].toString()),
+      backRating: double.parse(map[BookKeys.backRating].toString()),
+      markingsRating: double.parse(map[BookKeys.markingsRating].toString()),
+      bindingRating: double.parse(map[BookKeys.bindingRating].toString()),
       price: map[BookKeys.price] as int,
     );
   }

@@ -6,7 +6,7 @@ const bookUploadRoute = express.Router();
 
 bookUploadRoute.post("/user/upload", auth, async (req, res) => {
     try {
-        const { name, description, category, mrp, price, stock, images, rating } = req.body;
+        const { name, description, category, mrp, price, stock, images, rating, front_rating, back_rating, markings_rating, binding_rating} = req.body;
         console.log(name, description, category, mrp, price, stock, images, rating);
         let book = new Book({
             name,
@@ -17,6 +17,10 @@ bookUploadRoute.post("/user/upload", auth, async (req, res) => {
             stock,
             images,
             rating,
+            front_rating,
+            back_rating,
+            markings_rating,
+            binding_rating,
             user: req.user,
         });
 

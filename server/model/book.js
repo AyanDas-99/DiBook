@@ -26,6 +26,22 @@ const bookSchema = mongoose.Schema({
         required: true,
         type: Number,
     },
+    front_rating: {
+        required: true,
+        type: Number,
+    },
+    back_rating: {
+        required: true,
+        type: Number,
+    },
+    markings_rating: {
+        required: true,
+        type: Number,
+    },
+    binding_rating: {
+        required: true,
+        type: Number,
+    },
     price: {
         required: true,
         type: Number,
@@ -41,4 +57,4 @@ const bookSchema = mongoose.Schema({
 })
 
 const Book = mongoose.model("Book", bookSchema);
-module.exports =  Book;
+module.exports = Book;

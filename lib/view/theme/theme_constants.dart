@@ -5,6 +5,8 @@ class ThemeConstants {
     useMaterial3: true,
     fontFamily: 'Roboto',
     scaffoldBackgroundColor: lightYellow,
+    appBarTheme:
+        const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: darkGreen,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,

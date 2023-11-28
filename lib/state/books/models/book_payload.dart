@@ -80,6 +80,10 @@ class BookPayload {
       BookKeys.rating: rating,
       BookKeys.price: price,
       BookKeys.images: imageLinks,
+      BookKeys.frontRating: frontRating,
+      BookKeys.backRating: backRating,
+      BookKeys.markingsRating: markingsRating,
+      BookKeys.bindingRating: bindingRating,
     };
   }
 
