@@ -97,7 +97,6 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
   void signInWithToken(BuildContext context) async {
     try {
       final token = await LocalStorage.getToken();
-      print(token);
       if (token == null) {
         return;
       }
@@ -107,7 +106,6 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
         ...Constants.contentType,
         "x-auth-token": token,
       });
-      print(jsonDecode(res.body));
       if (context.mounted) {
         httpErrorHandler(
             context: context,
@@ -124,7 +122,9 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
             });
       }
     } catch (e) {
-      print(e.toString());
+      if (context.mounted) {
+        showSnackBar(context, e.toString());
+      }
     }
   }
 

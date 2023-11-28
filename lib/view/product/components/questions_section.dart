@@ -1,3 +1,4 @@
+import 'package:dibook/state/message/providers/upload_message_notifier_provider.dart';
 import 'package:dibook/view/components/default_textfield.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/rounded_container.dart';
@@ -6,7 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QuestionsSection extends ConsumerWidget {
-  QuestionsSection({super.key});
+  QuestionsSection(
+      {super.key, required this.bookId, required this.parentContext});
+  final String bookId;
+  final BuildContext parentContext;
 
   final controller = TextEditingController();
 
@@ -31,7 +35,14 @@ class QuestionsSection extends ConsumerWidget {
             )),
             const SizedBox(width: 10),
             TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                await ref
+                    .read(uploadMessageNotifierProvider.notifier)
+                    .uploadMessage(
+                        message: controller.text,
+                        bookId: bookId,
+                        context: context);
+              },
               style: ButtonStyle(
                 padding: const MaterialStatePropertyAll(EdgeInsets.all(22)),
                 backgroundColor:
@@ -48,9 +59,9 @@ class QuestionsSection extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: 20),
-        RoundedContainer(
+        const RoundedContainer(
           child: Padding(
-            padding: const EdgeInsets.all(20.0),
+            padding: EdgeInsets.all(20.0),
             child: Center(
               child: Text("No questions asked yet!"),
             ),
