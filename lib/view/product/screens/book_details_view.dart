@@ -73,7 +73,6 @@ class BookDetailsView extends StatelessWidget {
               const SizedBox(height: 20),
               QuestionsSection(
                 bookId: book.bookId,
-                parentContext: context,
               ),
             ],
           ),
