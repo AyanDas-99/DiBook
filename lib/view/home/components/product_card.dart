@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
                 ),
                 const Spacer(),
                 Text(
-                  book.name.shorten(25),
+                  book.name.shorten(20),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Row(

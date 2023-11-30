@@ -8,6 +8,7 @@ class Book {
   final String name;
   final String description;
   final String category;
+  final String sellerId;
   final int mrp;
   final int stock;
   final List<String> images;
@@ -24,6 +25,7 @@ class Book {
     required this.name,
     required this.description,
     required this.category,
+    required this.sellerId,
     required this.mrp,
     required this.stock,
     required this.images,
@@ -50,6 +52,7 @@ class Book {
       BookKeys.backRating: backRating,
       BookKeys.bindingRating: bindingRating,
       BookKeys.markingsRating: markingsRating,
+      BookKeys.user: sellerId,
     };
   }
 
@@ -59,6 +62,7 @@ class Book {
       name: map[BookKeys.name] as String,
       description: map[BookKeys.description] as String,
       category: map[BookKeys.category] as String,
+      sellerId: map[BookKeys.user] as String,
       mrp: map[BookKeys.mrp] as int,
       stock: map[BookKeys.stock] as int,
       images: (map[BookKeys.images] as List).map((e) => e.toString()).toList(),

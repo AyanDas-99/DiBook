@@ -1,17 +1,21 @@
+import 'dart:math';
+
 import 'package:dibook/state/message/providers/get_messages_by_book_id.dart';
 import 'package:dibook/state/message/providers/upload_message_notifier_provider.dart';
 import 'package:dibook/view/components/default_textfield.dart';
 import 'package:dibook/view/components/heading.dart';
-import 'package:dibook/view/components/rounded_container.dart';
-import 'package:dibook/view/product/components/replies_view.dart';
+import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/product/components/single_question_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class QuestionsSection extends ConsumerStatefulWidget {
-  QuestionsSection({super.key, required this.bookId});
+  const QuestionsSection(
+      {super.key, required this.bookId, required this.sellerId});
   final String bookId;
+  final String sellerId;
 
   @override
   ConsumerState<QuestionsSection> createState() => _QuestionsSectionState();
@@ -19,10 +23,11 @@ class QuestionsSection extends ConsumerStatefulWidget {
 
 class _QuestionsSectionState extends ConsumerState<QuestionsSection> {
   final controller = TextEditingController();
+  bool show = false;
+  int limit = 3;
 
   @override
   Widget build(BuildContext context) {
-    print("Building...");
     final questions = ref.watch(getMessagesByBookIdProvider(widget.bookId));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,30 +73,48 @@ class _QuestionsSectionState extends ConsumerState<QuestionsSection> {
           ],
         ),
         const SizedBox(height: 20),
-        SizedBox(
-          height: 300,
-          child: RoundedContainer(
-            child: questions.when(
-                data: (messages) {
-                  if (messages.isEmpty) {
-                    return const Padding(
-                      padding: EdgeInsets.all(20.0),
-                      child: Center(
-                        child: Text("No questions asked yet!"),
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                      itemCount: messages.length,
-                      itemBuilder: (context, index) {
-                        return SingleQuestion(message: messages[index]);
-                      });
+        questions.when(
+            data: (messages) {
+              if (messages.isEmpty) {
+                return const Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Center(
+                    child: Text("No questions asked yet!"),
+                  ),
+                );
+              }
+              return Column(children: [
+                ...List.generate(
+                    min(messages.length, limit),
+                    (index) => SingleQuestion(
+                          message: messages[index],
+                          sellerId: widget.sellerId,
+                        )),
+                if (messages.length > 5)
+                  TextButton(
+                      onPressed: () {
+                        setState(() {
+                          if (limit < messages.length) {
+                            limit += 3;
+                          } else {
+                            limit = 3;
+                          }
+                        });
+                      },
+                      child: Text((messages.length <= limit)
+                          ? "Show less"
+                          : "Show more"))
+              ]);
+            },
+            error: (e, _) => TextButton(
+                onPressed: () {
+                  ref.invalidate(getMessagesByBookIdProvider);
                 },
-                error: (e, _) => Text(e.toString()),
-                loading: () =>
-                    const Center(child: CircularProgressIndicator())),
-          ),
-        ),
+                child: const TextAndIcon(
+                  text: "Retry",
+                  icon: FontAwesomeIcons.rotate,
+                )),
+            loading: () => const Center(child: CircularProgressIndicator())),
       ],
     );
   }

@@ -28,7 +28,7 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
     isLoading = true;
     try {
       final user =
-          User(name: name, email: email, password: password, token: '');
+          User(name: name, email: email, password: password, token: '', id: '');
 
       final res = await http.post(
         Uri.parse("${Constants.baseUrl}/api/signup"),
@@ -59,7 +59,8 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
   }) async {
     isLoading = true;
     try {
-      final user = User(name: "", email: email, password: password, token: "");
+      final user =
+          User(name: "", email: email, password: password, token: "", id: "");
       final res = await http.post(
         Uri.parse("${Constants.baseUrl}/api/signin"),
         headers: Constants.contentType,
@@ -73,10 +74,12 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
             onSuccess: () {
               final response = jsonDecode(res.body);
               User user = User(
-                  name: response['name'],
-                  email: response['email'],
-                  token: response['token'],
-                  password: '');
+                name: response['name'],
+                email: response['email'],
+                token: response['token'],
+                password: '',
+                id: response['_id'],
+              );
 
               ref.read(userProvider.notifier).update((state) => user);
               LocalStorage.storeToken(response['token']);
@@ -113,10 +116,12 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
             onSuccess: () {
               final response = jsonDecode(res.body);
               User user = User(
-                  name: response['name'],
-                  email: response['email'],
-                  token: response['token'],
-                  password: response['password']);
+                name: response['name'],
+                email: response['email'],
+                token: response['token'],
+                password: response['password'],
+                id: response['_id'],
+              );
 
               ref.read(userProvider.notifier).update((state) => user);
             });

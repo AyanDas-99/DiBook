@@ -13,7 +13,7 @@ final getMessagesByBookIdProvider = FutureProvider.family
     messages.addAll(
         (jsonDecode(res.body) as List).map((e) => Message.fromMap(e)).toList());
   } else {
-    throw Exception(res.body);
+    return Future.error(jsonDecode(res.body));
   }
   return messages;
 });

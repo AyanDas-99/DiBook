@@ -19,6 +19,8 @@ class DefaultTextField extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       color: Colors.white,
       child: TextFormField(
+        minLines: 1,
+        maxLines: 5,
         keyboardType: keyboardType,
         validator: validator,
         controller: controller,

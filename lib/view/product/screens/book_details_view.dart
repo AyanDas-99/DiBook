@@ -73,6 +73,7 @@ class BookDetailsView extends StatelessWidget {
               const SizedBox(height: 20),
               QuestionsSection(
                 bookId: book.bookId,
+                sellerId: book.sellerId,
               ),
             ],
           ),
