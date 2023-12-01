@@ -8,7 +8,7 @@ final categoryBooksProvider = FutureProvider.autoDispose
     .family<List<Book>, String>((ref, category) async {
   List<Book> books = [];
   final res =
-      await http.get(Uri.parse("${Constants.baseUrl}/category/$category"));
+      await http.get(Uri.parse("${Constants.baseUrl}/book/category/$category"));
 
   if (res.statusCode == 200) {
     books.addAll((jsonDecode(res.body) as List)
@@ -17,5 +17,5 @@ final categoryBooksProvider = FutureProvider.autoDispose
 
     return books;
   }
-  return [];
+  return Future.error(jsonDecode(res.body));
 });

@@ -7,7 +7,8 @@ import 'package:http/http.dart' as http;
 final searchedBooksProvider =
     FutureProvider.autoDispose.family<List<Book>, String>((ref, query) async {
   List<Book> books = [];
-  final res = await http.get(Uri.parse("${Constants.baseUrl}/search/$query"));
+  final res =
+      await http.get(Uri.parse("${Constants.baseUrl}/book/search/$query"));
 
   if (res.statusCode == 200) {
     books.addAll((jsonDecode(res.body) as List)
@@ -16,5 +17,5 @@ final searchedBooksProvider =
 
     return books;
   }
-  return [];
+  return Future.error(jsonDecode(res.body));
 });

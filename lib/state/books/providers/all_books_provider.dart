@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 final allBooksProvider = FutureProvider.autoDispose<List<Book>>((ref) async {
   List<Book> books = [];
-  final res = await http.get(Uri.parse("${Constants.baseUrl}/all-books"));
+  final res = await http.get(Uri.parse("${Constants.baseUrl}/book/all-books"));
 
   if (res.statusCode == 200) {
     books.addAll((jsonDecode(res.body) as List)

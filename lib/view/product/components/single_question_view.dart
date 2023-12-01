@@ -2,7 +2,6 @@ import 'package:dibook/state/message/models/message.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/product/components/replies_view.dart';
-import 'package:dibook/view/product/components/reply_box.dart';
 import 'package:dibook/view/product/components/seller_flag.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
