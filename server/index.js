@@ -5,6 +5,7 @@ const bookUploadRoute = require('./routes/book_upload');
 const booksRoute = require('./routes/books');
 const messageUploadRoute = require('./routes/message_upload');
 const messagesRoute = require('./routes/messages');
+const userRoute = require('./routes/user');
 
 const cors = require('cors');
 
@@ -19,6 +20,7 @@ app.use(bookUploadRoute);
 app.use(booksRoute);
 app.use(messageUploadRoute);
 app.use(messagesRoute);
+app.use(userRoute);
 
 app.get("/hello", (req, res) => {
     res.send("Unrestricted access denied");
