@@ -15,6 +15,7 @@ class UpdateUserNotifier extends StateNotifier<IsLoading> {
   set isLoading(bool value) => {if (mounted) state = value};
 
   Future updateAddress(BuildContext context, String address) async {
+    isLoading = true;
     try {
       final user = ref.read(userProvider);
       final res = await http.post(
@@ -35,6 +36,8 @@ class UpdateUserNotifier extends StateNotifier<IsLoading> {
       if (context.mounted) {
         showSnackBar(context, e.toString());
       }
+    } finally {
+      isLoading = false;
     }
   }
 }

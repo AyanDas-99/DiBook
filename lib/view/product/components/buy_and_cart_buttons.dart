@@ -1,3 +1,4 @@
+import 'package:dibook/state/cart/providers/update_cart_notifier_provider.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,11 @@ class BuyAndCartButtons extends ConsumerWidget {
             ),
             const SizedBox(width: 20),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                ref
+                    .read(updateCartNotifierProvider.notifier)
+                    .addToCart(context: context, bookId: bookId);
+              },
               style: ButtonStyle(
                 backgroundColor:
                     MaterialStatePropertyAll(ThemeConstants.lightGreen),

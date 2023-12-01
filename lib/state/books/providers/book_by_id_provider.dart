@@ -4,8 +4,8 @@ import 'package:dibook/state/books/models/book.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-final searchedBooksProvider =
-    FutureProvider.autoDispose.family<Book, String>((ref, bookId) async {
+final bookByIdProvider =
+    FutureProvider.family<Book, String>((ref, bookId) async {
   final res = await http.get(Uri.parse("${Constants.baseUrl}/book/id/$bookId"));
 
   if (res.statusCode == 200) {
