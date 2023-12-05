@@ -1,5 +1,6 @@
 import 'package:dibook/state/books/providers/book_by_id_provider.dart';
 import 'package:dibook/state/cart/models/cart_item.dart';
+import 'package:dibook/view/utils/string_shortener.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,8 +14,12 @@ class CartItemView extends ConsumerWidget {
     return book.when(
         data: (book) => Row(
               children: [
-                Expanded(child: Text(book.name)),
-                Text(cartItem.quantity.toString())
+                Expanded(child: Text(book.name.shorten(10))),
+                Text(cartItem.quantity.toString()),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(cartItem.bookId)
               ],
             ),
         error: (e, _) => Text(e.toString()),

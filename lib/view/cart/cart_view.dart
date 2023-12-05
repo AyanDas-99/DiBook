@@ -1,5 +1,8 @@
 import 'package:dibook/state/cart/providers/cart_provider.dart';
+import 'package:dibook/state/order/models/order_payload.dart';
+import 'package:dibook/state/order/providers/order_notifier_provider.dart';
 import 'package:dibook/view/cart/components/cart_item.dart';
+import 'package:dibook/view/components/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -10,11 +13,21 @@ class CartView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartProvider);
     return cart.when(
-        data: (cart) => ListView.builder(
-              itemBuilder: (context, index) =>
-                  CartItemView(cartItem: cart.items[index]),
-              itemCount: cart.items.length,
-            ),
+        data: (cart) => Column(children: [
+              ...cart.items.map((e) => CartItemView(cartItem: e)).toList(),
+              MainButton(
+                  text: "Buy",
+                  onPressed: () {
+                    ref.read(orderNotifierProvider.notifier).placeOrder(
+                        context: context,
+                        orderList: cart.items
+                            .map((e) => OrderPayload(
+                                bookId: e.bookId,
+                                quantity: e.quantity,
+                                address: ""))
+                            .toList());
+                  })
+            ]),
         error: (e, _) => Text(e.toString()),
         loading: () => CircularProgressIndicator());
   }

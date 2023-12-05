@@ -7,6 +7,7 @@ const messageUploadRoute = require('./routes/message_upload');
 const messagesRoute = require('./routes/messages');
 const userRoute = require('./routes/user');
 const cartRoute = require('./routes/cart');
+const orderRoute = require('./routes/order');
 
 const cors = require('cors');
 
@@ -23,6 +24,7 @@ app.use(messageUploadRoute);
 app.use(messagesRoute);
 app.use(userRoute);
 app.use(cartRoute);
+app.use(orderRoute);
 
 app.get("/hello", (req, res) => {
     res.send("Unrestricted access denied");

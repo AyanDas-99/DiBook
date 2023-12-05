@@ -9,8 +9,8 @@ userRoute.post("/user/update-address", auth, async (req, res) => {
     try {
         const { address } = req.body;
         if (address != undefined) {
-            await User.findByIdAndUpdate(req.user, { address: address });
-            res.send(true);
+            let user = await User.findByIdAndUpdate(req.user, { address: address });
+            res.json(user);
         } else {
             res.status(500).json({"error": "address is not defined"})
         }

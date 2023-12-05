@@ -7,14 +7,15 @@ class User {
   final String password;
   final String token;
   final String id;
+  String address;
 
-  User({
-    required this.name,
-    required this.email,
-    required this.password,
-    required this.token,
-    required this.id,
-  });
+  User(
+      {required this.name,
+      required this.email,
+      required this.password,
+      required this.token,
+      required this.id,
+      required this.address});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -23,6 +24,7 @@ class User {
       'password': password,
       'token': token,
       'id': id,
+      'address': address,
     };
   }
 
@@ -33,7 +35,13 @@ class User {
       token: map['token'] as String,
       password: map['password'] as String,
       id: map['id'] as String,
+      address: map['address'] as String,
     );
+  }
+
+  User copyWithAddress(String address) {
+    this.address = address;
+    return this;
   }
 
   String toJson() => json.encode(toMap());
