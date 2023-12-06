@@ -21,8 +21,9 @@ class MainButton extends StatelessWidget {
       style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(
               backgroundColor ?? ThemeConstants.mainYellow),
-          shape: const MaterialStatePropertyAll(
-            RoundedRectangleBorder(),
+          shape: MaterialStatePropertyAll(
+            RoundedRectangleBorder(
+                side: BorderSide(color: color ?? ThemeConstants.mainYellow)),
           ),
           minimumSize:
               const MaterialStatePropertyAll(Size(double.infinity, 50))),

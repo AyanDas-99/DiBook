@@ -38,6 +38,7 @@ class TextAndIcon extends StatelessWidget {
       children = children.reversed.toList();
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: children,
     );
   }
