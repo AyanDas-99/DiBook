@@ -1,3 +1,4 @@
+import 'package:dibook/state/books/providers/book_by_id_provider.dart';
 import 'package:dibook/state/cart/providers/update_cart_notifier_provider.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
 import 'package:dibook/state/order/providers/order_notifier_provider.dart';
@@ -12,32 +13,43 @@ class BuyAndCartButtons extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final book = ref.watch(bookByIdProvider(bookId));
     return RoundedContainer(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
         child: ButtonBar(
           alignment: MainAxisAlignment.start,
           children: [
-            TextButton(
-              onPressed: () {
-                ref.read(orderNotifierProvider.notifier).placeOrder(
-                    context: context,
-                    orderList: [
-                      OrderPayload(bookId: bookId, quantity: 1, address: "")
-                    ]);
-              },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStatePropertyAll(ThemeConstants.mainYellow),
-                shape: const MaterialStatePropertyAll(
-                  RoundedRectangleBorder(),
-                ),
-              ),
-              child: const Text(
-                "Buy Now",
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
+            book.when(
+                data: (book) => (book.stock == 0)
+                    ? const Text("Not available")
+                    : TextButton(
+                        onPressed: (book.stock == 0)
+                            ? null
+                            : () {
+                                ref
+                                    .read(orderNotifierProvider.notifier)
+                                    .placeOrder(context: context, orderList: [
+                                  OrderPayload(
+                                      bookId: bookId, quantity: 1, address: "")
+                                ]);
+
+                                ref.invalidate(bookByIdProvider);
+                              },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                              ThemeConstants.mainYellow),
+                          shape: const MaterialStatePropertyAll(
+                            RoundedRectangleBorder(),
+                          ),
+                        ),
+                        child: const Text(
+                          "Buy Now",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                error: (e, _) => Text(e.toString()),
+                loading: () => const CircularProgressIndicator()),
             const SizedBox(width: 20),
             TextButton(
               onPressed: () {

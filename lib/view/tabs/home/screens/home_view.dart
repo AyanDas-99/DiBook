@@ -1,7 +1,7 @@
 import 'package:dibook/view/components/heading.dart';
-import 'package:dibook/view/home/components/categories_list.dart';
-import 'package:dibook/view/home/components/all_product_list.dart';
-import 'package:dibook/view/home/constants/strings.dart';
+import 'package:dibook/view/tabs/home/components/categories_list.dart';
+import 'package:dibook/view/tabs/home/components/all_product_list.dart';
+import 'package:dibook/view/tabs/home/constants/strings.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {

@@ -14,8 +14,8 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => BookDetailsView(book)));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => BookDetailsView(book.bookId)));
       },
       child: RoundedContainer(
         child: Padding(

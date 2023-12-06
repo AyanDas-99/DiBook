@@ -8,10 +8,12 @@ class ThemeConstants {
     appBarTheme:
         const AppBarTheme(iconTheme: IconThemeData(color: Colors.white)),
     navigationBarTheme: NavigationBarThemeData(
-      backgroundColor: darkGreen,
+      elevation: 0,
+      shadowColor: Colors.transparent,
+      backgroundColor: Colors.transparent,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-      iconTheme: const MaterialStatePropertyAll(
-        IconThemeData(color: Colors.white),
+      iconTheme: MaterialStatePropertyAll(
+        IconThemeData(color: darkGreen, size: 20),
       ),
       indicatorColor: Colors.transparent,
     ),

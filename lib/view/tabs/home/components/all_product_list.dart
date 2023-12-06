@@ -1,5 +1,5 @@
 import 'package:dibook/state/books/providers/all_books_provider.dart';
-import 'package:dibook/view/home/components/product_card.dart';
+import 'package:dibook/view/tabs/home/components/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -26,6 +26,16 @@ class AllProductList extends ConsumerWidget {
           );
         },
         error: (e, _) => Text(e.toString()),
-        loading: () => const CircularProgressIndicator());
+        loading: () => SizedBox(
+              height: 200,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 3,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset("asset/gif/shimmer.gif"),
+                      )),
+            ));
   }
 }

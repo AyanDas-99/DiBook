@@ -20,7 +20,7 @@ class SingleBook extends StatelessWidget {
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => BookDetailsView(book)));
+                  builder: (context) => BookDetailsView(book.bookId)));
             },
             child: RoundedContainer(
               child: Padding(

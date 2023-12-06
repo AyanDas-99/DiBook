@@ -6,7 +6,8 @@ import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/main_button.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
-import 'package:dibook/view/profile/constants.dart';
+import 'package:dibook/view/order/screens/orders_view.dart';
+import 'package:dibook/view/tabs/profile/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -68,12 +69,19 @@ class ProfileView extends ConsumerWidget {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(Constants.orders),
-                          const Icon(Icons.arrow_right)
-                        ],
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const OrderView(),
+                          ));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(Constants.orders),
+                            const Icon(Icons.arrow_right)
+                          ],
+                        ),
                       ),
                       const Divider(),
                       InkWell(
