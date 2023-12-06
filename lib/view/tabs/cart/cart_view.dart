@@ -13,27 +13,30 @@ class CartView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartProvider);
-    return SingleChildScrollView(
-      child: cart.when(
-          data: (cart) => Column(children: [
-                ...cart.items.map((e) => CartItemView(cartItem: e)).toList(),
-                MainButton(
-                    text: "Buy",
-                    onPressed: () {
-                      ref.read(orderNotifierProvider.notifier).placeOrder(
-                          context: context,
-                          orderList: cart.items
-                              .map((e) => OrderPayload(
-                                  bookId: e.bookId,
-                                  quantity: e.quantity,
-                                  address: ""))
-                              .toList());
-                    })
-              ]),
-          error: (e, _) => Text(e.toString()),
-          loading: () => Column(
-              children:
-                  List.generate(4, (index) => ShimmerContainer(context)))),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: cart.when(
+            data: (cart) => Column(children: [
+                  ...cart.items.map((e) => CartItemView(cartItem: e)).toList(),
+                  MainButton(
+                      text: "Buy",
+                      onPressed: () {
+                        ref.read(orderNotifierProvider.notifier).placeOrder(
+                            context: context,
+                            orderList: cart.items
+                                .map((e) => OrderPayload(
+                                    bookId: e.bookId,
+                                    quantity: e.quantity,
+                                    address: ""))
+                                .toList());
+                      })
+                ]),
+            error: (e, _) => Text(e.toString()),
+            loading: () => Column(
+                children:
+                    List.generate(4, (index) => ShimmerContainer(context)))),
+      ),
     );
   }
 }

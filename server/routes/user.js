@@ -4,6 +4,7 @@ const userRoute = express.Router();
 const User = require('../model/user');
 const Cart = require('../model/cart');
 const Order = require('../model/order');
+const Book = require('../model/book');
 
 // statusCode 200 if updated
 userRoute.post("/user/update-address", auth, async (req, res) => {
@@ -38,6 +39,17 @@ userRoute.get("/user/orders", auth, async (req, res) => {
     } catch (e) {
         res.status(500).json({"error": e.message });
     }
+})
+
+// get books on sale
+userRoute.get("/user/books-on-sale", auth, async(req, res) => {
+     try {
+        let books = await Book.find({user: req.user});
+        res.json(books);
+    } catch (e) {
+        res.status(500).json({"error": e.message });
+    }
+
 })
 
 

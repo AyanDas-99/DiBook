@@ -1,6 +1,6 @@
 import 'package:dibook/view/tabs/cart/cart_view.dart';
 import 'package:dibook/view/tabs/home/screens/home_view.dart';
-import 'package:dibook/view/tabs/profile/profile_view.dart';
+import 'package:dibook/view/tabs/profile/screens/profile_view.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
