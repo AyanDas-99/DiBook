@@ -32,7 +32,7 @@ class OrderCard extends ConsumerWidget {
                   image: NetworkImage(book.images[0]),
                 ),
                 const SizedBox(width: 20),
-                Expanded(
+                Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -41,40 +41,40 @@ class OrderCard extends ConsumerWidget {
                         sub: true,
                       ),
                       const SizedBox(height: 15),
-                      Row(
-                        children: [
-                          Text(
-                            "Rs. ${book.price}",
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 15),
-                          const Text(
-                            "x",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 15),
-                          Text(
-                            "${order.quantity}",
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 15),
-                          const Text(
-                            "=",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 15),
-                          Text(
-                            "Rs. ${book.price * order.quantity}",
-                            style: TextStyle(
-                                color: ThemeConstants.darkGreen,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 250),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Rs. ${book.price}",
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const Text(
+                              "x",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "${order.quantity}",
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            const Text(
+                              "=",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Rs. ${book.price * order.quantity}",
+                              style: TextStyle(
+                                  color: ThemeConstants.darkGreen,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 15),
                       SizedBox(

@@ -49,4 +49,18 @@ cartRoute.post("/cart/remove-from-cart", auth, async (req, res) => {
     }
 })
 
+cartRoute.post("/cart/delete-from-cart", auth, async(req, res) => {
+    try {
+        const bookId = req.body.bookId;
+        let cart = await Cart.findOne({ user_id: req.user });
+        let index = cart.items.findIndex((item) => item.book_id == bookId);
+        cart.items.splice(index, 1);
+        cart = await cart.save();
+        res.json(cart);
+
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+})
+
 module.exports = cartRoute;

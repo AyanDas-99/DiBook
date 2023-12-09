@@ -8,7 +8,7 @@ class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.book});
   final Book book;
 
-  int discount(int mrp, int price) => ((price / mrp) * 100).ceil();
+  int discount(int mrp, int price) => 100 - ((price / mrp) * 100).ceil();
 
   @override
   Widget build(BuildContext context) {

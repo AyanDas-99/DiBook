@@ -35,6 +35,9 @@ class BuyAndCartButtons extends ConsumerWidget {
                                 ]);
 
                                 ref.invalidate(bookByIdProvider);
+
+                                // Navigator.of(context).push(MaterialPageRoute(
+                                //     builder: (context) => PaymentView()));
                               },
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(

@@ -21,8 +21,7 @@ class BooksList extends StatelessWidget {
             sub: true,
           ),
           const SizedBox(height: 10),
-          if (books.isNotEmpty)
-            ...books.map((book) => SingleBook(book)).toList(),
+          if (books.isNotEmpty) ...books.map((book) => SingleBook(book)),
           if (books.isEmpty) const Center(child: Text("No books found")),
         ],
       ),

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 final bookByIdProvider =
-    FutureProvider.family.autoDispose<Book, String>((ref, bookId) async {
+    FutureProvider.family<Book, String>((ref, bookId) async {
   final res = await http.get(Uri.parse("${Constants.baseUrl}/book/id/$bookId"));
 
   if (res.statusCode == 200) {
