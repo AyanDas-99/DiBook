@@ -33,7 +33,8 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
           password: password,
           token: '',
           id: '',
-          address: '');
+          address: '',
+          photoUrl: '');
 
       final res = await http.post(
         Uri.parse("${Constants.baseUrl}/api/signup"),
@@ -70,7 +71,8 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
           password: password,
           token: "",
           id: "",
-          address: "");
+          address: "",
+          photoUrl: '');
       final res = await http.post(
         Uri.parse("${Constants.baseUrl}/api/signin"),
         headers: Constants.contentType,
@@ -89,7 +91,8 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
                 token: response['token'],
                 password: '',
                 id: response['_id'],
-                address: '',
+                address: response['address'],
+                photoUrl: response['photo_url'],
               );
 
               ref.read(userProvider.notifier).update((state) => user);
@@ -132,7 +135,8 @@ class AuthStateNotifier extends StateNotifier<IsLoading> {
                 token: response['token'],
                 password: response['password'],
                 id: response['_id'],
-                address: '',
+                address: response['address'],
+                photoUrl: response['photo_url'],
               );
 
               ref.read(userProvider.notifier).update((state) => user);

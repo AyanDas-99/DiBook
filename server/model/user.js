@@ -26,7 +26,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
-    
+    photo_url: {
+        type: String,
+        default: "",
+    } 
 })
 
 const User = mongoose.model("User", userSchema);

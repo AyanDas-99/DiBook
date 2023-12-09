@@ -7,19 +7,16 @@ const Order = require('../model/order');
 const Book = require('../model/book');
 
 // statusCode 200 if updated
-userRoute.post("/user/update-address", auth, async (req, res) => {
+userRoute.post("/user/update-user", auth, async (req, res) => {
     try {
-        const { address } = req.body;
-        if (address != undefined) {
-            let user = await User.findByIdAndUpdate(req.user, { address: address });
-            res.json(user);
-        } else {
-            res.status(500).json({ "error": "address is not defined" })
-        }
+        const { address, photo_url, name } = req.body;
+        let user = await User.findByIdAndUpdate(req.user, { address: address, photo_url, name });
+        res.json(user);
     } catch (e) {
         res.status(500).json({ "error": e.message });
     }
 })
+
 
 // get cart from user
 userRoute.get("/user/cart", auth, async (req, res) => {
@@ -37,17 +34,17 @@ userRoute.get("/user/orders", auth, async (req, res) => {
         let orders = await Order.find({ user_id: req.user });
         res.json(orders);
     } catch (e) {
-        res.status(500).json({"error": e.message });
+        res.status(500).json({ "error": e.message });
     }
 })
 
 // get books on sale
-userRoute.get("/user/books-on-sale", auth, async(req, res) => {
-     try {
-        let books = await Book.find({user: req.user});
+userRoute.get("/user/books-on-sale", auth, async (req, res) => {
+    try {
+        let books = await Book.find({ user: req.user });
         res.json(books);
     } catch (e) {
-        res.status(500).json({"error": e.message });
+        res.status(500).json({ "error": e.message });
     }
 
 })

@@ -1,4 +1,5 @@
 import 'package:dibook/state/auth/providers/auth_state_provider.dart';
+import 'package:dibook/state/user/provider/update_user_notifier_provider.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
@@ -52,8 +53,17 @@ class ProfileView extends ConsumerWidget {
               Align(
                   alignment: Alignment.topLeft,
                   child: Heading(text: Constants.profile)),
-              const CircleAvatar(
-                radius: 50,
+              ClipOval(
+                child: SizedBox.fromSize(
+                  size: const Size.fromRadius(60),
+                  child: FadeInImage(
+                    fit: BoxFit.cover,
+                    placeholder: const AssetImage("asset/gif/shimmer.gif"),
+                    image: NetworkImage(user.photoUrl),
+                    imageErrorBuilder: (context, error, stackTrace) =>
+                        Image.asset("asset/images/image_error.png"),
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
               Text(
@@ -133,6 +143,19 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
                       ),
+                      MainButton(
+                          text: "Update user",
+                          onPressed: () {
+                            ref
+                                .read(updateUserNotifierProvider.notifier)
+                                .updateUser(
+                                  context,
+                                  name: "Ayan Admin",
+                                  address: "Aerial Bay, Diglipur",
+                                  photoUrl:
+                                      "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg",
+                                );
+                          }),
                     ],
                   ),
                 ),

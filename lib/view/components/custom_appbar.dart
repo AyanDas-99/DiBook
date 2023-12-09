@@ -3,6 +3,7 @@ import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/title.dart';
 import 'package:dibook/view/searched_books/searched_books_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
+import 'package:dibook/view/utils/string_shortener.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -39,7 +40,7 @@ PreferredSizeWidget customAppbar(BuildContext context,
               );
             } else {
               return Text(
-                user.name,
+                user.name.shorten(20),
                 style: const TextStyle(color: Colors.white),
               );
             }
@@ -89,9 +90,15 @@ PreferredSizeWidget customAppbar(BuildContext context,
                       style: TextStyle(color: Colors.white),
                     );
                   }
-                  return const Text(
-                    "Showing user delivery address",
-                    style: TextStyle(color: Colors.white),
+                  if (user.address.isEmpty) {
+                    return const Text(
+                      "Add delivery address in the profile settings",
+                      style: TextStyle(color: Colors.white),
+                    );
+                  }
+                  return Text(
+                    user.address.shorten(40),
+                    style: const TextStyle(color: Colors.white),
                   );
                 }),
               ),

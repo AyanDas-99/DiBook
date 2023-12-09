@@ -30,7 +30,9 @@ class ProductCard extends StatelessWidget {
                       width: 90,
                       placeholder: const AssetImage("asset/gif/shimmer.gif"),
                       imageErrorBuilder: (context, error, stackTrace) =>
-                          Image.asset("asset/images/image_error.png"),
+                          Expanded(
+                              child:
+                                  Image.asset("asset/images/image_error.png")),
                       image: NetworkImage(book.images[0])),
                 ),
                 const Spacer(),
