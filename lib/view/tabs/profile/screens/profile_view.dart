@@ -1,5 +1,4 @@
 import 'package:dibook/state/auth/providers/auth_state_provider.dart';
-import 'package:dibook/state/user/provider/update_photo_notifier_provider.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
@@ -9,6 +8,7 @@ import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
 import 'package:dibook/view/tabs/profile/screens/books_on_sale/books_on_sale_view.dart';
+import 'package:dibook/view/tabs/profile/screens/components/image_view.dart';
 import 'package:dibook/view/tabs/profile/screens/orders/orders_view.dart';
 import 'package:dibook/view/tabs/profile/constants.dart';
 import 'package:dibook/view/tabs/profile/screens/user_settings/user_settings_view.dart';
@@ -58,23 +58,33 @@ class ProfileView extends ConsumerWidget {
                   child: Heading(text: Constants.profile)),
               InkWell(
                 onTap: () {
-                  ref
-                      .read(updatePhotoProvider.notifier)
-                      .updateProfilePhoto(context);
+                  // Show image on top
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ImageView(NetworkImage(user.photoUrl))));
                 },
                 child: ClipOval(
                   child: SizedBox.fromSize(
                     size: const Size.fromRadius(60),
-                    child: FadeInImage(
-                      fit: BoxFit.cover,
-                      placeholder: const AssetImage("asset/gif/shimmer.gif"),
-                      image: NetworkImage(user.photoUrl),
-                      imageErrorBuilder: (context, error, stackTrace) =>
-                          Image.asset("asset/images/image_error.png"),
+                    child: Hero(
+                      tag: "profile",
+                      child: FadeInImage(
+                        fit: BoxFit.cover,
+                        placeholder: const AssetImage("asset/gif/shimmer.gif"),
+                        image: NetworkImage(user.photoUrl),
+                        imageErrorBuilder: (context, error, stackTrace) =>
+                            Image.asset("asset/images/image_error.png"),
+                      ),
                     ),
                   ),
                 ),
               ),
+              // SizedBox.fromSize(
+              //     size: Size.fromRadius(60),
+              //     child: ProfileImage(NetworkImage(user.photoUrl))),
+
               const SizedBox(height: 20),
               Text(
                 user.name,
@@ -110,7 +120,7 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      const Divider(),
+                      const Divider(height: 30),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
@@ -131,7 +141,7 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      const Divider(),
+                      const Divider(height: 30),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
@@ -152,7 +162,7 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      const Divider(),
+                      const Divider(height: 30),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -166,7 +176,7 @@ class ProfileView extends ConsumerWidget {
                           const Icon(Icons.arrow_right)
                         ],
                       ),
-                      const Divider(),
+                      const Divider(height: 30),
                       InkWell(
                         onTap: () => logout(context, ref),
                         child: Row(
@@ -183,7 +193,7 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
                       ),
-                      const Divider(),
+                      const Divider(height: 30),
                       InkWell(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(

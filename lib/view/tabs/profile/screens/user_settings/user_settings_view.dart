@@ -6,16 +6,11 @@ import 'package:dibook/view/tabs/profile/screens/user_settings/components/second
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class UserSettingsView extends ConsumerStatefulWidget {
+class UserSettingsView extends ConsumerWidget {
   const UserSettingsView({super.key});
 
   @override
-  ConsumerState<UserSettingsView> createState() => _UserSettingsViewState();
-}
-
-class _UserSettingsViewState extends ConsumerState<UserSettingsView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
     final nameController = TextEditingController(text: user!.name);
     final addressController = TextEditingController(text: user.address);

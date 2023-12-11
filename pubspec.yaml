@@ -45,7 +45,7 @@ dependencies:
   hooks_riverpod: ^2.4.9
   cloudinary_public: ^0.23.1
   flutter_rating_bar: ^4.0.1
-  upi_india: ^3.0.1
+  photo_view: ^0.14.0
   # upi_india: ^3.0.1
 
 dev_dependencies:

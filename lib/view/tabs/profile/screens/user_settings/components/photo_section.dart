@@ -43,33 +43,38 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
                   .read(updatePhotoProvider.notifier)
                   .updateProfilePhoto(context);
             },
-            child: ClipOval(
-              child: (user!.photoUrl.isEmpty)
-                  ? Container(
-                      height: 150,
-                      width: 150,
-                      color: Colors.blueGrey.shade100,
-                      child: const Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.user,
-                          color: Colors.white,
-                          size: 40,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ClipOval(
+                  child: (user!.photoUrl.isEmpty)
+                      ? Container(
+                          height: 150,
+                          width: 150,
+                          color: Colors.blueGrey.shade100,
+                        )
+                      : SizedBox.fromSize(
+                          size: const Size.fromRadius(
+                            80,
+                          ),
+                          child: FadeInImage(
+                            fit: BoxFit.cover,
+                            placeholder:
+                                const AssetImage("asset/gif/shimmer.gif"),
+                            image: NetworkImage(user.photoUrl),
+                            imageErrorBuilder: (context, error, stackTrace) =>
+                                Image.asset("asset/images/image_error.png"),
+                          ),
                         ),
-                      ),
-                    )
-                  : SizedBox.fromSize(
-                      size: const Size.fromRadius(
-                        80,
-                      ),
-                      child: FadeInImage(
-                        fit: BoxFit.cover,
-                        placeholder: const AssetImage("asset/gif/shimmer.gif"),
-                        image: NetworkImage(user.photoUrl),
-                        imageErrorBuilder: (context, error, stackTrace) =>
-                            Image.asset("asset/images/image_error.png"),
-                      ),
-                    ),
+                ),
+                FaIcon(
+                  FontAwesomeIcons.user,
+                  color: Colors.white,
+                  size: 40,
+                )
+              ],
             ),
+            //
           ),
         const SizedBox(height: 10),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [

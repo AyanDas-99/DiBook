@@ -21,7 +21,12 @@ class DefaultTextField extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       color: Colors.white,
       child: TextFormField(
-        onChanged: onChange,
+        onChanged: (String value) {
+          controller.text = value;
+          if (onChange != null) {
+            onChange!(value);
+          }
+        },
         minLines: 1,
         maxLines: 5,
         keyboardType: keyboardType,
