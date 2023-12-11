@@ -1,16 +1,19 @@
 import 'package:dibook/state/auth/providers/auth_state_provider.dart';
-import 'package:dibook/state/user/provider/update_user_notifier_provider.dart';
+import 'package:dibook/state/user/provider/update_photo_notifier_provider.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/main_button.dart';
 import 'package:dibook/view/components/rounded_container.dart';
+import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
 import 'package:dibook/view/tabs/profile/screens/books_on_sale/books_on_sale_view.dart';
 import 'package:dibook/view/tabs/profile/screens/orders/orders_view.dart';
 import 'package:dibook/view/tabs/profile/constants.dart';
+import 'package:dibook/view/tabs/profile/screens/user_settings/user_settings_view.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ProfileView extends ConsumerWidget {
@@ -53,15 +56,22 @@ class ProfileView extends ConsumerWidget {
               Align(
                   alignment: Alignment.topLeft,
                   child: Heading(text: Constants.profile)),
-              ClipOval(
-                child: SizedBox.fromSize(
-                  size: const Size.fromRadius(60),
-                  child: FadeInImage(
-                    fit: BoxFit.cover,
-                    placeholder: const AssetImage("asset/gif/shimmer.gif"),
-                    image: NetworkImage(user.photoUrl),
-                    imageErrorBuilder: (context, error, stackTrace) =>
-                        Image.asset("asset/images/image_error.png"),
+              InkWell(
+                onTap: () {
+                  ref
+                      .read(updatePhotoProvider.notifier)
+                      .updateProfilePhoto(context);
+                },
+                child: ClipOval(
+                  child: SizedBox.fromSize(
+                    size: const Size.fromRadius(60),
+                    child: FadeInImage(
+                      fit: BoxFit.cover,
+                      placeholder: const AssetImage("asset/gif/shimmer.gif"),
+                      image: NetworkImage(user.photoUrl),
+                      imageErrorBuilder: (context, error, stackTrace) =>
+                          Image.asset("asset/images/image_error.png"),
+                    ),
                   ),
                 ),
               ),
@@ -89,7 +99,13 @@ class ProfileView extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(Constants.orders),
+                            TextAndIcon(
+                              text: Constants.orders,
+                              icon: FontAwesomeIcons.truckFast,
+                              iconSize: 15,
+                              reversed: true,
+                              space: 20,
+                            ),
                             const Icon(Icons.arrow_right)
                           ],
                         ),
@@ -104,7 +120,13 @@ class ProfileView extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(Constants.sellABook),
+                            TextAndIcon(
+                              text: Constants.sellABook,
+                              icon: FontAwesomeIcons.moneyCheckDollar,
+                              iconSize: 15,
+                              reversed: true,
+                              space: 20,
+                            ),
                             const Icon(Icons.arrow_right)
                           ],
                         ),
@@ -119,7 +141,13 @@ class ProfileView extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(Constants.booksOnSale),
+                            TextAndIcon(
+                              text: Constants.booksOnSale,
+                              icon: FontAwesomeIcons.bookAtlas,
+                              iconSize: 15,
+                              reversed: true,
+                              space: 20,
+                            ),
                             const Icon(Icons.arrow_right)
                           ],
                         ),
@@ -128,7 +156,13 @@ class ProfileView extends ConsumerWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(Constants.earnings),
+                          TextAndIcon(
+                            text: Constants.earnings,
+                            icon: FontAwesomeIcons.piggyBank,
+                            iconSize: 15,
+                            reversed: true,
+                            space: 20,
+                          ),
                           const Icon(Icons.arrow_right)
                         ],
                       ),
@@ -138,24 +172,37 @@ class ProfileView extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(Constants.logout),
+                            TextAndIcon(
+                              text: Constants.logout,
+                              icon: FontAwesomeIcons.arrowUpFromBracket,
+                              iconSize: 15,
+                              reversed: true,
+                              space: 20,
+                            ),
                             const Icon(Icons.arrow_right)
                           ],
                         ),
                       ),
-                      MainButton(
-                          text: "Update user",
-                          onPressed: () {
-                            ref
-                                .read(updateUserNotifierProvider.notifier)
-                                .updateUser(
-                                  context,
-                                  name: "Ayan Admin",
-                                  address: "Aerial Bay, Diglipur",
-                                  photoUrl:
-                                      "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg",
-                                );
-                          }),
+                      const Divider(),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const UserSettingsView()));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextAndIcon(
+                              text: Constants.userSettings,
+                              icon: FontAwesomeIcons.penClip,
+                              iconSize: 15,
+                              reversed: true,
+                              space: 20,
+                            ),
+                            const Icon(Icons.arrow_right)
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -7,6 +7,6 @@ class Constants {
   static String earnings = "Earnings";
   static String logout = "Logout";
   static String logIn = "Login";
-
+  static String userSettings = "User Settings";
   const Constants._();
 }

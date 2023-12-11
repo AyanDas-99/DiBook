@@ -28,6 +28,7 @@ class ProductCard extends StatelessWidget {
                 Center(
                   child: FadeInImage(
                       width: 90,
+                      height: 120,
                       placeholder: const AssetImage("asset/gif/shimmer.gif"),
                       imageErrorBuilder: (context, error, stackTrace) =>
                           Expanded(

@@ -10,6 +10,7 @@ class TextAndIcon extends StatelessWidget {
     this.fontSize,
     this.iconSize,
     this.reversed = false,
+    this.space,
   });
   final String text;
   final IconData icon;
@@ -18,6 +19,7 @@ class TextAndIcon extends StatelessWidget {
   final double? fontSize;
   final double? iconSize;
   final bool reversed;
+  final double? space;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class TextAndIcon extends StatelessWidget {
         style: style?.copyWith(color: color, fontSize: fontSize) ??
             TextStyle(color: color, fontSize: fontSize),
       ),
-      const SizedBox(width: 5),
+      SizedBox(width: space ?? 5),
       Icon(
         icon,
         size: iconSize,

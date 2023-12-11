@@ -30,7 +30,7 @@ class BookUploadNotifier extends StateNotifier<IsLoading> {
       for (File image in payload.images) {
         CloudinaryResponse res = await cloudinary.uploadFile(
             CloudinaryFile.fromFile(image.path,
-                folder: "Dibook/${payload.name}"));
+                folder: "Dibook/books/${payload.name}"));
         imageLinks.add(res.secureUrl);
       }
       payload.copyWithImageLinks(imageLinks);

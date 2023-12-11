@@ -5,12 +5,14 @@ class DefaultTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final Function(String)? onChange;
   const DefaultTextField({
     super.key,
     required this.controller,
     this.validator,
     this.placeHolder,
     this.keyboardType,
+    this.onChange,
   });
 
   @override
@@ -19,6 +21,7 @@ class DefaultTextField extends StatelessWidget {
       padding: const EdgeInsets.all(2),
       color: Colors.white,
       child: TextFormField(
+        onChanged: onChange,
         minLines: 1,
         maxLines: 5,
         keyboardType: keyboardType,
