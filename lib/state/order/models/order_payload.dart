@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class OrderPayload {
   final String bookId;
-  final int quantity;
+  int quantity;
   String address;
 
   OrderPayload({
@@ -25,5 +25,12 @@ class OrderPayload {
     return this;
   }
 
+  set setQuantity(int val) => quantity = val;
+
   String toJson() => json.encode(toMap());
+
+  @override
+  String toString() {
+    return "${bookId} : ${quantity} : ${address}";
+  }
 }

@@ -24,23 +24,28 @@ class OrderNotifier extends StateNotifier<IsLoading> {
     try {
       final user = ref.read(userProvider);
 
-      http.Response response = http.Response("", 500);
+      List<http.Response> responses = [];
 
       for (OrderPayload orderPayload in orderList) {
-        orderPayload.copyWithAddress(user!.address);
-        response = await http.post(
+        if (orderPayload.address.isEmpty) {
+          orderPayload.copyWithAddress(user!.address);
+        }
+        http.Response response = await http.post(
             Uri.parse("${Constants.baseUrl}/order/place-order"),
-            headers: {...Constants.contentType, "x-auth-token": user.token},
+            headers: {...Constants.contentType, "x-auth-token": user!.token},
             body: orderPayload.toJson());
+        responses.add(response);
       }
 
       if (context.mounted) {
-        httpErrorHandler(
-            context: context,
-            response: response,
-            onSuccess: () {
-              showSnackBar(context, "Order placed");
-            });
+        for (http.Response res in responses) {
+          httpErrorHandler(
+              context: context,
+              response: res,
+              onSuccess: () {
+                showSnackBar(context, "Order placed");
+              });
+        }
       }
     } catch (e) {
       if (context.mounted) {

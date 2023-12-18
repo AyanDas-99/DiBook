@@ -5,6 +5,7 @@ import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/components/shimmer_container.dart';
 import 'package:dibook/view/product/components/star_rating.dart';
+import 'package:dibook/view/product/screens/book_details_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:dibook/view/utils/string_shortener.dart';
 import 'package:flutter/material.dart';
@@ -60,10 +61,18 @@ class CartItemView extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                book.name.shorten(25),
-                                style: const TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.bold),
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          BookDetailsView(book.bookId)));
+                                },
+                                child: Text(
+                                  book.name.shorten(25),
+                                  style: const TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                               const SizedBox(height: 30),
                               StarRating(book.rating),
@@ -85,6 +94,20 @@ class CartItemView extends ConsumerWidget {
                                     fontSize: 13,
                                     decoration: TextDecoration.lineThrough),
                               ),
+
+                              // If none available
+                              if (book.stock == 0)
+                                const Text(
+                                  "Not available",
+                                  style: TextStyle(color: Colors.red),
+                                ),
+
+                              // If less available than required
+                              if (book.stock != 0 && book.stock < item.quantity)
+                                Text(
+                                  "Only ${book.stock} available in stock",
+                                  style: const TextStyle(color: Colors.red),
+                                ),
                               const SizedBox(height: 20),
                             ],
                           ),

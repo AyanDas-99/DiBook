@@ -14,9 +14,9 @@ orderRoute.post("/order/place-order", auth, async (req, res) => {
         let book = await Book.findById(bookId);
         
         if(book.stock == 0) {
-            return res.json({error: "Book not available"});
+            return res.status(409).json({error: "Book not available"});
         } else if(quantity > book.stock) {
-            return res.json({error: "Order quantity is more than stock left"});
+            return res.status(409).json({error: "Order quantity is more than stock left"});
         }
 
         book.stock -= quantity;

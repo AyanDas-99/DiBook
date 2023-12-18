@@ -2,6 +2,7 @@ import 'package:dibook/state/books/models/book.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/product/components/star_rating.dart';
+import 'package:dibook/view/product/screens/book_details_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:dibook/view/utils/string_shortener.dart';
 import 'package:flutter/material.dart';
@@ -44,10 +45,17 @@ class BookCard extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      book.name.shorten(25),
-                      style: const TextStyle(
-                          fontSize: 17, fontWeight: FontWeight.bold),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                BookDetailsView(book.bookId)));
+                      },
+                      child: Text(
+                        book.name.shorten(25),
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
                     ),
                     const SizedBox(height: 10),
                     StarRating(book.rating),

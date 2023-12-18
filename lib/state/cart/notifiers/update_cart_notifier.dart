@@ -28,12 +28,7 @@ class UpdateCartNotifier extends StateNotifier<IsLoading> {
           body: jsonEncode({"bookId": bookId}));
 
       if (context.mounted) {
-        httpErrorHandler(
-            context: context,
-            response: res,
-            onSuccess: () {
-              showSnackBar(context, "Added to cart");
-            });
+        httpErrorHandler(context: context, response: res, onSuccess: () {});
       }
     } catch (e) {
       if (context.mounted) {
@@ -56,12 +51,7 @@ class UpdateCartNotifier extends StateNotifier<IsLoading> {
           body: jsonEncode({"bookId": bookId}));
 
       if (context.mounted) {
-        httpErrorHandler(
-            context: context,
-            response: res,
-            onSuccess: () {
-              showSnackBar(context, "Removed from cart");
-            });
+        httpErrorHandler(context: context, response: res, onSuccess: () {});
       }
     } catch (e) {
       if (context.mounted) {

@@ -86,4 +86,9 @@ class Book {
 
   @override
   int get hashCode => Object.hashAll([bookId]);
+
+  @override
+  String toString() {
+    return bookId;
+  }
 }

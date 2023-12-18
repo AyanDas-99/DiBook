@@ -1,9 +1,9 @@
 import 'package:dibook/state/cart/providers/cart_provider.dart';
 import 'package:dibook/state/cart/providers/cart_total_provider.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
-import 'package:dibook/state/order/providers/order_notifier_provider.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/shimmer_container.dart';
+import 'package:dibook/view/order/screens/confirm_address/confirm_address_screen.dart';
 import 'package:dibook/view/tabs/cart/components/cart_item.dart';
 import 'package:dibook/view/components/main_button.dart';
 import 'package:flutter/material.dart';
@@ -40,19 +40,28 @@ class CartView extends ConsumerWidget {
                           Heading(text: "Total: Rs. $total"),
                           const SizedBox(height: 20),
                           MainButton(
-                              text: "Proceed to buy",
+                              text: "Proceed to Order",
                               onPressed: () {
-                                ref
-                                    .read(orderNotifierProvider.notifier)
-                                    .placeOrder(
-                                        context: context,
-                                        orderList: cart
-                                            .items
+                                // ref
+                                //     .read(orderNotifierProvider.notifier)
+                                //     .placeOrder(
+                                //         context: context,
+                                //         orderList: cart
+                                //             .items
+                                //             .map((e) => OrderPayload(
+                                //                 bookId: e.bookId,
+                                //                 quantity: e.quantity,
+                                //                 address: ""))
+                                //             .toList());
+
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ConfirmAddressScreen(
+                                        orders: cart.items
                                             .map((e) => OrderPayload(
                                                 bookId: e.bookId,
                                                 quantity: e.quantity,
                                                 address: ""))
-                                            .toList());
+                                            .toList())));
                               }),
                         ],
                       ),
