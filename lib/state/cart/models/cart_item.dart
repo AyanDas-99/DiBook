@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class CartItem {
+import 'package:equatable/equatable.dart';
+
+class CartItem extends Equatable {
   final String bookId;
   final int quantity;
 
@@ -16,4 +18,7 @@ class CartItem {
 
   factory CartItem.fromJson(String source) =>
       CartItem.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  List<Object?> get props => [bookId, quantity];
 }

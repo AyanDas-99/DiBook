@@ -3,6 +3,7 @@ import 'package:dibook/state/cart/providers/update_cart_notifier_provider.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
 import 'package:dibook/state/order/providers/order_notifier_provider.dart';
 import 'package:dibook/view/components/rounded_container.dart';
+import 'package:dibook/view/order/confirm_address/screens/confirm_address_screen.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,17 +28,24 @@ class BuyAndCartButtons extends ConsumerWidget {
                         onPressed: (book.stock == 0)
                             ? null
                             : () {
-                                ref
-                                    .read(orderNotifierProvider.notifier)
-                                    .placeOrder(context: context, orderList: [
-                                  OrderPayload(
-                                      bookId: bookId, quantity: 1, address: "")
-                                ]);
+                                // ref
+                                //     .read(orderNotifierProvider.notifier)
+                                //     .placeOrder(context: context, orderList: [
+                                //   OrderPayload(
+                                //       bookId: bookId, quantity: 1, address: "")
+                                // ]);
 
                                 ref.invalidate(bookByIdProvider);
 
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => PaymentView()));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ConfirmAddressScreen(
+                                          orders: [
+                                            OrderPayload(
+                                                bookId: bookId,
+                                                quantity: 1,
+                                                address: "")
+                                          ],
+                                        )));
                               },
                         style: ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(

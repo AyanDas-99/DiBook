@@ -2,8 +2,10 @@
 import 'dart:convert';
 
 import 'package:dibook/state/cart/models/cart_item.dart';
+import 'package:dibook/state/order/models/order_payload.dart';
+import 'package:equatable/equatable.dart';
 
-class Cart {
+class Cart extends Equatable {
   final String userId;
   final List<CartItem> items;
 
@@ -22,4 +24,16 @@ class Cart {
 
   factory Cart.fromJson(String source) =>
       Cart.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  factory Cart.fromOrderPayloadList(String userId, List<OrderPayload> orders) {
+    Cart cart = Cart(userId: userId, items: []);
+    for (OrderPayload order in orders) {
+      cart.items.add(CartItem(bookId: order.bookId, quantity: order.quantity));
+    }
+    return cart;
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [userId, items];
 }

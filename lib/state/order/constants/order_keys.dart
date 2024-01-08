@@ -5,4 +5,5 @@ class OrderKeys {
   static String address = "address";
   static String quantity = "quantity";
   static String status = "status";
+  static String createdAt = "createdAt";
 }

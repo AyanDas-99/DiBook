@@ -1,4 +1,5 @@
 import 'package:dibook/state/auth/constants.dart';
+import 'package:dibook/state/order/models/order.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
 import 'package:dibook/state/typedefs/is_loading.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
@@ -15,11 +16,12 @@ class OrderNotifier extends StateNotifier<IsLoading> {
 
   set isLoading(bool value) => {if (mounted) state = value};
 
-  Future placeOrder({
+  Future<List<Order>> placeOrder({
     required BuildContext context,
     required List<OrderPayload> orderList,
   }) async {
-    if (orderList.isEmpty) return;
+    List<Order> orders = [];
+    if (orderList.isEmpty) return orders;
     isLoading = true;
     try {
       final user = ref.read(userProvider);
@@ -30,6 +32,7 @@ class OrderNotifier extends StateNotifier<IsLoading> {
         if (orderPayload.address.isEmpty) {
           orderPayload.copyWithAddress(user!.address);
         }
+
         http.Response response = await http.post(
             Uri.parse("${Constants.baseUrl}/order/place-order"),
             headers: {...Constants.contentType, "x-auth-token": user!.token},
@@ -44,6 +47,7 @@ class OrderNotifier extends StateNotifier<IsLoading> {
               response: res,
               onSuccess: () {
                 showSnackBar(context, "Order placed");
+                orders.add(Order.fromJson(res.body));
               });
         }
       }
@@ -54,6 +58,8 @@ class OrderNotifier extends StateNotifier<IsLoading> {
     } finally {
       isLoading = false;
     }
+
+    return orders;
   }
 
   Future cancelOrder(

@@ -11,7 +11,7 @@ const orderRoute = require('./routes/order');
 
 const cors = require('cors');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express()
 const DB = "mongodb+srv://ayandas:ayandaspassword@cluster0.zrqugro.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp";
 

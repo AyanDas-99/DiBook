@@ -3,6 +3,8 @@ const Order = require('../model/order');
 const Book = require('../model/book');
 const auth = require('../middleware/auth');
 const { json } = require('express');
+const ReceiptTemplate = require('../model/receipt_template');
+
 
 const orderRoute = express.Router();
 
@@ -12,11 +14,11 @@ orderRoute.post("/order/place-order", auth, async (req, res) => {
         console.log(req.body);
 
         let book = await Book.findById(bookId);
-        
-        if(book.stock == 0) {
-            return res.status(409).json({error: "Book not available"});
-        } else if(quantity > book.stock) {
-            return res.status(409).json({error: "Order quantity is more than stock left"});
+
+        if (book.stock == 0) {
+            return res.status(409).json({ error: "Book not available" });
+        } else if (quantity > book.stock) {
+            return res.status(409).json({ error: "Order quantity is more than stock left" });
         }
 
         book.stock -= quantity;
@@ -31,7 +33,7 @@ orderRoute.post("/order/place-order", auth, async (req, res) => {
 
         order = await order.save();
         book = await book.save();
-        
+
         return res.json(order);
     } catch (e) {
         res.status(500).json({ error: e.message });
@@ -41,11 +43,39 @@ orderRoute.post("/order/place-order", auth, async (req, res) => {
 
 orderRoute.post("/order/cancel-order", auth, async (req, res) => {
     try {
-        const orderId= req.body.orderId;
+        const orderId = req.body.orderId;
         await Order.findByIdAndDelete(orderId);
     } catch (e) {
         res.status(500).json({ error: e.message });
     }
+})
+
+orderRoute.post("/order/get-order-receipt", auth, async (req, res) => {
+    try {
+        const orderIds = req.body["orders"];
+        const paymentMethod = req.body.paymentMethod
+        console.log(req.body);
+        // orders = [
+        // [Order, Book],
+        // [Order, Book],
+        // ]
+        const orders = [];
+        for (const orderId of orderIds) {
+            let orderItem = await Order.findById(orderId);
+            let book = await Book.findById(orderItem.book_id);
+            orders.push([orderItem, book]);
+        }
+
+
+        // Generate pdf
+        const doc = await ReceiptTemplate.createPdf(orders, req.user, paymentMethod);
+        res.contentType('application/pdf');
+        doc.pipe(res);
+    
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+
 })
 
 module.exports = orderRoute;

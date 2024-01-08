@@ -8,13 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 PreferredSizeWidget customAppbar(BuildContext context,
-    {bool showSearchBar = true, bool leading = false}) {
+    {bool showSearchBar = true, bool leading = false, Widget? leadingWidget}) {
   final searchController = TextEditingController();
 
   return PreferredSize(
     preferredSize: Size.fromHeight(showSearchBar ? 170 : 100),
     child: AppBar(
       automaticallyImplyLeading: leading,
+      leading: leadingWidget,
       flexibleSpace: Container(
         decoration: BoxDecoration(gradient: ThemeConstants.appbarGradient),
       ),

@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class OrderPayload {
+import 'package:equatable/equatable.dart';
+
+class OrderPayload extends Equatable {
   final String bookId;
   int quantity;
   String address;
@@ -33,4 +35,7 @@ class OrderPayload {
   String toString() {
     return "${bookId} : ${quantity} : ${address}";
   }
+
+  @override
+  List<Object?> get props => [bookId, quantity, address];
 }

@@ -5,8 +5,12 @@ const orderSchema = new mongoose.Schema({
     book_id: String,
     quantity: Number,
     address: String,
-    status: String
-});
+    status: String,
+},
+    {
+        timestamps: true
+    },
+);
 
 
 const Order = mongoose.model("Order", orderSchema);
