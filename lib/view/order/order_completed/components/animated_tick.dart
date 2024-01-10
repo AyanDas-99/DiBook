@@ -44,7 +44,7 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-        Duration(seconds: 2),
+        const Duration(seconds: 1),
         () => _controller
           ..reset()
           ..forward());

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:dibook/state/auth/constants.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';

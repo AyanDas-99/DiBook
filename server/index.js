@@ -8,6 +8,22 @@ const messagesRoute = require('./routes/messages');
 const userRoute = require('./routes/user');
 const cartRoute = require('./routes/cart');
 const orderRoute = require('./routes/order');
+var cloudinary = require('cloudinary').v2;
+require('dotenv').config();
+
+cloudinary.config({ 
+  cloud_name: 'drrrtwtyf', 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
+
+// Cloudinary config check
+if (typeof (process.env.CLOUDINARY_URL) === 'undefined') {
+  console.warn('!! cloudinary config is undefined !!');
+  console.warn('export CLOUDINARY_URL or set dotenv file');
+}
+
 
 const cors = require('cors');
 

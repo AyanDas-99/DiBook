@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 import 'package:dibook/state/order/models/order.dart';
 import 'package:dibook/state/order/providers/order_receipt_provider.dart';
@@ -27,25 +26,31 @@ class OrderCompletedScreen extends StatefulHookConsumerWidget {
 class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
   Uint8List? orderReceipt;
   bool? receiptLoaded;
-  void getReceipt() async {
-    receiptLoaded = null;
-    orderReceipt = await ref.watch(orderReceiptProvider.notifier).buildReceipt(
+  late Future<Uint8List?> orderReceiptFuture;
+
+  void getReceipt() {
+    orderReceiptFuture = ref.read(orderReceiptProvider.notifier).buildReceipt(
         orderIds: widget.orders.map((e) => e.orderId).toList(),
         paymentMethod: widget.paymentMethod,
         context: context);
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     getReceipt();
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     useEffect(() {
-      if (orderReceipt == null) {
-        receiptLoaded = false;
-      } else {
-        receiptLoaded = true;
-      }
-      setState(() {});
+      print("useEffect updated..");
+      orderReceiptFuture.then((value) {
+        setState(() {
+          receiptLoaded = value != null;
+          orderReceipt = value;
+        });
+      });
       return null;
     }, [orderReceipt]);
 
@@ -69,7 +74,7 @@ class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
                 AnimatedPrompt(
                   title: Strings.yourOrderHasBeenConfirmed,
                   subtitle: '',
-                  child: Icon(
+                  child: const Icon(
                     Icons.check,
                     color: Colors.white,
                   ),

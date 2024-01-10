@@ -2,8 +2,8 @@ const express = require('express');
 const Order = require('../model/order');
 const Book = require('../model/book');
 const auth = require('../middleware/auth');
-const { json } = require('express');
 const ReceiptTemplate = require('../model/receipt_template');
+const CloudinaryUtils = require('../utils/cloudinary_util')
 
 
 const orderRoute = express.Router();
@@ -52,9 +52,8 @@ orderRoute.post("/order/cancel-order", auth, async (req, res) => {
 
 orderRoute.post("/order/get-order-receipt", auth, async (req, res) => {
     try {
-        const orderIds = req.body["orders"];
+        const orderIds = req.body.orders;
         const paymentMethod = req.body.paymentMethod
-        console.log(req.body);
         // orders = [
         // [Order, Book],
         // [Order, Book],
@@ -69,8 +68,8 @@ orderRoute.post("/order/get-order-receipt", auth, async (req, res) => {
 
         // Generate pdf
         const doc = await ReceiptTemplate.createPdf(orders, req.user, paymentMethod);
-        res.contentType('application/pdf');
-        doc.pipe(res);
+        const link = await CloudinaryUtils.uploadFileToCloudinary(doc);
+        res.json(link);
     
     } catch (e) {
         res.status(500).json({ error: e.message });
