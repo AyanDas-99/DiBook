@@ -50,6 +50,7 @@ dependencies:
   flutter_hooks: ^0.20.4
   path_provider: ^2.1.1
   flutter_local_notifications: ^16.3.0
+  flutter_downloader: ^1.11.6
 
 dev_dependencies:
   flutter_lints: ^3.0.1
@@ -78,6 +79,7 @@ flutter:
     - asset/gif/animated_book.gif
     - asset/gif/shimmer.gif
     - asset/images/image_error.png
+    - asset/images/pdf.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

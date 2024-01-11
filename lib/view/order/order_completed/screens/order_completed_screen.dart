@@ -1,9 +1,11 @@
 import 'dart:typed_data';
 import 'package:dibook/state/order/models/order.dart';
 import 'package:dibook/state/order/providers/order_receipt_provider.dart';
+import 'package:dibook/state/utils/download_file.dart';
 import 'package:dibook/state/utils/save_file_to_documents.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
 import 'package:dibook/view/components/rounded_container.dart';
+import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/main_view.dart';
 import 'package:dibook/view/order/order_completed/components/animated_tick.dart';
 import 'package:dibook/view/order/order_completed/constants/strings.dart';
@@ -24,9 +26,8 @@ class OrderCompletedScreen extends StatefulHookConsumerWidget {
 }
 
 class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
-  Uint8List? orderReceipt;
-  bool? receiptLoaded;
-  late Future<Uint8List?> orderReceiptFuture;
+  String? orderReceipt;
+  late Future<String?> orderReceiptFuture;
 
   void getReceipt() {
     orderReceiptFuture = ref.read(orderReceiptProvider.notifier).buildReceipt(
@@ -47,7 +48,6 @@ class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
       print("useEffect updated..");
       orderReceiptFuture.then((value) {
         setState(() {
-          receiptLoaded = value != null;
           orderReceipt = value;
         });
       });
@@ -66,7 +66,8 @@ class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
           )),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -81,18 +82,47 @@ class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
                 ),
               ],
             ),
-            Text(receiptLoaded.toString()),
+
+            const SizedBox(height: 50),
+
             // Order Receipt
-            RoundedContainer(
-              width: 50,
-              child: (receiptLoaded != null)
-                  ? (receiptLoaded == true)
-                      ? InkWell(
-                          onTap: () => saveToDocuments(
-                              orderReceipt!, "Receipt", context),
-                          child: const FaIcon(FontAwesomeIcons.solidFilePdf))
-                      : const FaIcon(FontAwesomeIcons.circleArrowUp)
-                  : const CircularProgressIndicator(),
+            InkWell(
+              onTap: () {
+                if (orderReceipt != null) {
+                  if (orderReceipt!.isEmpty) {
+                    getReceipt();
+                  } else {
+                    // Download file
+                    downloadFile(orderReceipt!);
+                  }
+                }
+              },
+              child: RoundedContainer(
+                width: 200,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: (orderReceipt != null)
+                      ? (orderReceipt!.isNotEmpty)
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  "Download Receipt",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(width: 10),
+                                Image.asset(
+                                  'asset/images/pdf.png',
+                                  width: 40,
+                                ),
+                              ],
+                            )
+                          : const TextAndIcon(
+                              text: "Receipt Failed",
+                              icon: FontAwesomeIcons.rotateRight)
+                      : const Center(child: CircularProgressIndicator()),
+                ),
+              ),
             ),
           ],
         ),

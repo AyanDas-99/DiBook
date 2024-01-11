@@ -33,6 +33,12 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
     _containerScaleAnimation =
         Tween<double>(begin: 2.0, end: 0.4).animate(_controller);
     _iconScaleAnimation = Tween<double>(begin: 6, end: 8).animate(_controller);
+
+    Future.delayed(
+        const Duration(seconds: 1),
+        () => _controller
+          ..reset()
+          ..forward());
   }
 
   @override
@@ -43,12 +49,6 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(
-        const Duration(seconds: 1),
-        () => _controller
-          ..reset()
-          ..forward());
-
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(

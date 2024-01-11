@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:dibook/state/auth/constants.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/state/utils/show_snack_bar.dart';
@@ -12,11 +11,11 @@ class OrderReceiptNotifier extends StateNotifier<Null> {
 
   final Ref ref;
 
-  Future<Uint8List?> buildReceipt(
+  Future<String?> buildReceipt(
       {required List<String> orderIds,
       required String paymentMethod,
       required BuildContext context}) async {
-    Uint8List? pdf;
+    String? receipt;
     try {
       final user = ref.read(userProvider);
       final res = await http.post(
@@ -28,7 +27,7 @@ class OrderReceiptNotifier extends StateNotifier<Null> {
           }));
 
       if (res.statusCode == 200) {
-        pdf = res.bodyBytes;
+        receipt = res.body;
       }
     } catch (e) {
       if (context.mounted) {
@@ -36,6 +35,6 @@ class OrderReceiptNotifier extends StateNotifier<Null> {
       }
     }
 
-    return pdf;
+    return receipt;
   }
 }
