@@ -2,10 +2,10 @@
 
 Dibook is an online reselling platform for books, allowing users to effortlessly buy and sell books. Whether you're looking for a new read or want to declutter your bookshelf, Dibook has got you covered.
 
-![Home](screenshots/Screen74.png)
-![Order Complete Screen](screenshots/Screen46.png)
-![Book Details](screenshots/Screen09.png)
-![Cart](screenshots/Screen89.png)
+<img src="screenshots/Screen74.png" alt="Home Screen" width="250">
+<img src="screenshots/Screen09.png" alt="Book Details" width="250">
+<img src="screenshots/Screen89.png" alt="Cart" width="250">
+<img src="screenshots/Screen46.png" alt="Order Complete Screen" width="250">
 
 ## Features
 
