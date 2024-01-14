@@ -2,6 +2,11 @@
 
 Dibook is an online reselling platform for books, allowing users to effortlessly buy and sell books. Whether you're looking for a new read or want to declutter your bookshelf, Dibook has got you covered.
 
+![Home](screenshots/Screen74.png)
+![Order Complete Screen](screenshots/Screen46.png)
+![Book Details](screenshots/Screen09.png)
+![Cart](screenshots/Screen89.png)
+
 ## Features
 
 - **Category-based Collection:** Easily explore books organized by categories.
@@ -12,6 +17,13 @@ Dibook is an online reselling platform for books, allowing users to effortlessly
 - **Sell Your Books:** Have books to spare? List them for sale hassle-free.
 - **Price Determination:** Set prices based on the condition of each book.
 - **Downloadable Order Receipt:** Receive a PDF receipt for your orders.
+
+## Prerequisites
+
+The app depends on MongoDB for database, and Cloudinary for media files.
+- Create a mongoDB account on [cloud.mongodb.com](cloud.mongodb.com)
+- Create a project and cluster
+- Create a cloudinary account.
 
 ## Getting Started
 
@@ -26,16 +38,27 @@ To run Dibook on your Android device, follow these steps:
 2. **Set up .env file:**
 - Navigate to the 'server' folder.
 - Create a file named .env.
-- Add the following content, replacing api_key and api_secret with your Cloudinary API credentials:
+- Add the following content, replacing api_key and api_secret with your Cloudinary & Mongo DB API credentials:
 ```
-CLOUDINARY_API_KEY=api_key
-CLOUDINARY_API_SECRET=api_secret
+    CLOUDINARY_API_KEY=api_key
+    CLOUDINARY_API_SECRET=api_secret
+    MONGO_USERNAME=your-mongo-username
+    MONGO_PASSWORD=your-mongodb-password
+    MONGO_CLUSTER=your-mongo-cluster
 ```
-3. **Run the app**
+
+3. **Start the server locally**
+
+     Inside the `server` folder, run this command:
+```
+    npm run dev
+```
+
+4. **Run the app**
  ```
- flutter run
+    flutter run
  ```
-4. **Explore Dibook:**
+5. **Explore Dibook:**
 - Open the app on your Android phone.
 - Browse, buy, sell, and enjoy the seamless book-reselling experience!
 
@@ -47,7 +70,3 @@ This project is licensed under the MIT License.
 
 ## Acknowledgments
 Special thanks to the Flutter community and the developers of libraries/tools used in this project.
-
-Happy reading and selling with Dibook!
-
-

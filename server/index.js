@@ -29,7 +29,7 @@ const cors = require('cors');
 
 const PORT = process.env.PORT || 3000;
 const app = express()
-const DB = "mongodb+srv://ayandas:ayandaspassword@cluster0.zrqugro.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp";
+const DB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/?retryWrites=true&w=majority&appName=AtlasApp`;
 
 app.use(cors());
 app.use(express.json());
