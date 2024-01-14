@@ -76,10 +76,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+  #  Gifs
     - asset/gif/animated_book.gif
     - asset/gif/shimmer.gif
+    - asset/gif/file_cabinet.gif
+
+  #  Images
     - asset/images/image_error.png
     - asset/images/pdf.png
+    - asset/images/search-icon.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

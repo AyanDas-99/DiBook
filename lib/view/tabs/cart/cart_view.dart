@@ -1,11 +1,14 @@
 import 'package:dibook/state/cart/providers/cart_provider.dart';
 import 'package:dibook/state/cart/providers/cart_total_provider.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
+import 'package:dibook/state/user/provider/user_provider.dart';
+import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/shimmer_container.dart';
 import 'package:dibook/view/order/confirm_address/screens/confirm_address_screen.dart';
 import 'package:dibook/view/tabs/cart/components/cart_item.dart';
 import 'package:dibook/view/components/main_button.dart';
+import 'package:dibook/view/tabs/profile/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -15,6 +18,31 @@ class CartView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cart = ref.watch(cartProvider);
+    final user = ref.watch(userProvider);
+    if (user == null) {
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Cannot access cart"),
+            const SizedBox(height: 20),
+            InkWell(
+                child: Heading(
+                  text: Constants.logIn,
+                  sub: true,
+                  color: Colors.indigoAccent,
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AuthScreenView(),
+                      ));
+                }),
+          ],
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(

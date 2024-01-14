@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dibook/state/books/providers/all_books_provider.dart';
 import 'package:dibook/view/tabs/home/components/product_card.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,8 @@ class AllProductList extends ConsumerWidget {
     final books = ref.watch(allBooksProvider);
     return books.when(
         data: (booksList) {
+          booksList = booksList.sublist(0, min(booksList.length, 5));
+
           final productCards =
               booksList.map((e) => ProductCard(book: e)).toList();
           return SizedBox(

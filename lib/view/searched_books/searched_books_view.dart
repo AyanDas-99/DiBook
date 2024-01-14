@@ -17,7 +17,9 @@ class SearchedBooksView extends ConsumerWidget {
           data: (books) => BooksList(title: searchQuery, books: books),
           error: (e, _) => Text(e.toString()),
           loading: () => const Center(
-                child: CircularProgressIndicator(),
+                child: Image(
+                  image: AssetImage('asset/gif/animated_book.gif'),
+                ),
               )),
     );
   }

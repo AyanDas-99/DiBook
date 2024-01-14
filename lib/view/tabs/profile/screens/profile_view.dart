@@ -3,7 +3,6 @@ import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/view/auth/screens/auth_screen_view.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/heading.dart';
-import 'package:dibook/view/components/main_button.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
@@ -34,18 +33,27 @@ class ProfileView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userProvider);
     if (user == null) {
-      return Column(
-        children: [
-          MainButton(
-              text: Constants.logIn,
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AuthScreenView(),
-                    ));
-              })
-        ],
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Cannot access profile"),
+            const SizedBox(height: 20),
+            InkWell(
+                child: Heading(
+                  text: Constants.logIn,
+                  sub: true,
+                  color: Colors.indigoAccent,
+                ),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AuthScreenView(),
+                      ));
+                }),
+          ],
+        ),
       );
     }
     return Scaffold(
@@ -82,10 +90,6 @@ class ProfileView extends ConsumerWidget {
                   ),
                 ),
               ),
-              // SizedBox.fromSize(
-              //     size: Size.fromRadius(60),
-              //     child: ProfileImage(NetworkImage(user.photoUrl))),
-
               const SizedBox(height: 20),
               Text(
                 user.name,

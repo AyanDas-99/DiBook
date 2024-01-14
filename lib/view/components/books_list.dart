@@ -17,12 +17,17 @@ class BooksList extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Heading(
-            text: title,
+            text: '''Results for "$title"''',
             sub: true,
           ),
           const SizedBox(height: 10),
           if (books.isNotEmpty) ...books.map((book) => SingleBook(book)),
-          if (books.isEmpty) const Center(child: Text("No books found")),
+          if (books.isEmpty) ...[
+            const Center(
+              child: Image(image: AssetImage("asset/images/search-icon.png")),
+            ),
+            const Center(child: Heading(text: "Not found", sub: true))
+          ]
         ],
       ),
     ));
