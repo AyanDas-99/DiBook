@@ -18,7 +18,7 @@ class ReceiptTemplate {
 
       // Additional Data
       doc.font('Helvetica');
-      doc.fontSize(8).text(`Order Date: ${orders[0].createdAt}`);
+      doc.fontSize(8).text(`Order Date: ${orders[0][0].createdAt}`);
       doc.text(`Customer User Id: ${userId}`);
       doc.moveDown();
       doc.moveDown();

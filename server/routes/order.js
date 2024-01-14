@@ -70,7 +70,7 @@ orderRoute.post("/order/get-order-receipt", auth, async (req, res) => {
         const doc = await ReceiptTemplate.createPdf(orders, req.user, paymentMethod);
         const link = await CloudinaryUtils.uploadFileToCloudinary(doc);
         res.json(link);
-    
+        
     } catch (e) {
         res.status(500).json({ error: e.message });
     }

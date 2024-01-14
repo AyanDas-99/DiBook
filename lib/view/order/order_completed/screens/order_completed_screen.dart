@@ -1,8 +1,6 @@
-import 'dart:typed_data';
 import 'package:dibook/state/order/models/order.dart';
 import 'package:dibook/state/order/providers/order_receipt_provider.dart';
 import 'package:dibook/state/utils/download_file.dart';
-import 'package:dibook/state/utils/save_file_to_documents.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/components/text_and_icon.dart';

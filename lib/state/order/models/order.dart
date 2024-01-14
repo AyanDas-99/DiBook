@@ -11,7 +11,7 @@ class Order extends Equatable {
   final String status;
   final DateTime createdAt;
 
-  Order(
+  const Order(
       {required this.userId,
       required this.orderId,
       required this.bookId,
@@ -28,7 +28,7 @@ class Order extends Equatable {
       OrderKeys.quantity: quantity,
       OrderKeys.address: address,
       OrderKeys.status: status,
-      OrderKeys.createdAt: createdAt,
+      OrderKeys.createdAt: createdAt.millisecondsSinceEpoch,
     };
   }
 
