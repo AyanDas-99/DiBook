@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:dibook/state/books/providers/all_books_provider.dart';
 import 'package:dibook/view/tabs/home/components/product_card.dart';
+import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class AllProductList extends ConsumerWidget {
@@ -29,7 +31,15 @@ class AllProductList extends ConsumerWidget {
                     )),
           );
         },
-        error: (e, _) => Text(e.toString()),
+        error: (e, _) => Column(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.circleExclamation,
+                  color: ThemeConstants.darkGreen,
+                ),
+                const Text("Something went wrong"),
+              ],
+            ),
         loading: () => SizedBox(
               height: 200,
               child: ListView.builder(

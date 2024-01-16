@@ -31,7 +31,7 @@ userRoute.get("/user/cart", auth, async (req, res) => {
 // get orders from user
 userRoute.get("/user/orders", auth, async (req, res) => {
     try {
-        let orders = await Order.find({ user_id: req.user });
+        let orders = await Order.find({ user_id: req.user }).sort({ "createdAt": -1 });
         res.json(orders);
     } catch (e) {
         res.status(500).json({ "error": e.message });

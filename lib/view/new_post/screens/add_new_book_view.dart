@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dibook/state/books/models/book_payload.dart';
+import 'package:dibook/state/book_upload/models/book_payload.dart';
 import 'package:dibook/state/utils/pick_images.dart';
 import 'package:dibook/view/auth/components/name_field.dart';
 import 'package:dibook/view/components/main_button.dart';

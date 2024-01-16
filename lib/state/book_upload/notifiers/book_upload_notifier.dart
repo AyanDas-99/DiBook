@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dibook/state/auth/constants.dart';
-import 'package:dibook/state/books/models/book_payload.dart';
+import 'package:dibook/state/book_upload/models/book_payload.dart';
 import 'package:dibook/state/typedefs/is_loading.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';

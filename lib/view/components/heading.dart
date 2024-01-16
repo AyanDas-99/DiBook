@@ -12,7 +12,7 @@ class Heading extends StatelessWidget {
       text,
       softWrap: true,
       style: TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: sub ? FontWeight.w500 : FontWeight.w700,
         color: color,
       ),

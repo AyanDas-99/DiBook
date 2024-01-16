@@ -9,7 +9,9 @@ import 'package:dibook/view/order/confirm_address/screens/confirm_address_screen
 import 'package:dibook/view/tabs/cart/components/cart_item.dart';
 import 'package:dibook/view/components/main_button.dart';
 import 'package:dibook/view/tabs/profile/constants.dart';
+import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CartView extends ConsumerWidget {
@@ -81,14 +83,46 @@ class CartView extends ConsumerWidget {
                               }),
                         ],
                       ),
-                      error: (e, _) => Text(e.toString()),
+                      error: (e, _) => InkWell(
+                        onTap: () {
+                          ref.invalidate(cartProvider);
+                        },
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.rotateLeft,
+                                color: ThemeConstants.darkGreen,
+                              ),
+                              const Heading(text: "Something went wrong")
+                            ],
+                          ),
+                        ),
+                      ),
                       loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
                     ),
                   ]);
             },
-            error: (e, _) => Text(e.toString()),
+            error: (e, _) => InkWell(
+                  onTap: () {
+                    ref.invalidate(cartProvider);
+                  },
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.rotateLeft,
+                          color: ThemeConstants.darkGreen,
+                        ),
+                        const Heading(text: "Something went wrong")
+                      ],
+                    ),
+                  ),
+                ),
             loading: () => Column(
                 children:
                     List.generate(4, (index) => ShimmerContainer(context)))),

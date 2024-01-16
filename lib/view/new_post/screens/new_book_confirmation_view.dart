@@ -1,5 +1,5 @@
 import 'package:dibook/state/book_upload/providers/book_upload_notifier_provider.dart';
-import 'package:dibook/state/books/models/book_payload.dart';
+import 'package:dibook/state/book_upload/models/book_payload.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/main_button.dart';
