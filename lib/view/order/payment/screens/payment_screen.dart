@@ -29,7 +29,6 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.orders);
     final total = ref
         .watch(cartTotalProvider(Cart.fromOrderPayloadList("", widget.orders)));
     return Scaffold(

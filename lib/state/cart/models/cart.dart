@@ -26,7 +26,7 @@ class Cart extends Equatable {
       Cart.fromMap(json.decode(source) as Map<String, dynamic>);
 
   factory Cart.fromOrderPayloadList(String userId, List<OrderPayload> orders) {
-    Cart cart = Cart(userId: userId, items: []);
+    Cart cart = Cart(userId: userId, items: const []);
     for (OrderPayload order in orders) {
       cart.items.add(CartItem(bookId: order.bookId, quantity: order.quantity));
     }
@@ -34,6 +34,5 @@ class Cart extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [userId, items];
 }

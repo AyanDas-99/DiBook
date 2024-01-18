@@ -9,19 +9,14 @@ class ProfileImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PhotoView(
       imageProvider: imageProvider,
-      loadingBuilder: (context, progress) => Center(
-        child: Container(
+      loadingBuilder: (context, progress) => const Center(
+        child: SizedBox(
           width: 20.0,
           height: 20.0,
-          child: CircularProgressIndicator(
-              // value: _progress == null
-              //     ? null
-              //     : _progress.cumulativeBytesLoaded /
-              //         _progress.expectedTotalBytes,
-              ),
+          child: CircularProgressIndicator(),
         ),
       ),
-      backgroundDecoration: BoxDecoration(color: Colors.black),
+      backgroundDecoration: const BoxDecoration(color: Colors.black),
       gaplessPlayback: false,
       customSize: MediaQuery.of(context).size,
       heroAttributes: const PhotoViewHeroAttributes(

@@ -180,7 +180,6 @@ class _ConfirmAddressScreenState extends ConsumerState<ConfirmAddressScreen> {
                   MainButton(
                     text: "Proceed",
                     onPressed: () {
-                      print(widget.orders);
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => PaymentScreen(
                               orders: widget.orders,

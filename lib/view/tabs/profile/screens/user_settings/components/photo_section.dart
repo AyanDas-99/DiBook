@@ -67,7 +67,7 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
                           ),
                         ),
                 ),
-                FaIcon(
+                const FaIcon(
                   FontAwesomeIcons.user,
                   color: Colors.white,
                   size: 40,

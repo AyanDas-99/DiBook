@@ -51,6 +51,8 @@ dependencies:
   path_provider: ^2.1.1
   flutter_local_notifications: ^16.3.0
   flutter_downloader: ^1.11.6
+  flutter_dotenv: ^5.1.0
+  cloudinary: ^1.2.0
 
 dev_dependencies:
   flutter_lints: ^3.0.1
@@ -85,6 +87,9 @@ flutter:
     - asset/images/image_error.png
     - asset/images/pdf.png
     - asset/images/search-icon.png
+
+  #   env
+    - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

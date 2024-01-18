@@ -15,6 +15,8 @@ void httpErrorHandler({
       break;
     case 400:
       showSnackBar(context, jsonDecode(response.body)['msg']);
+    case 401:
+      showSnackBar(context, jsonDecode(response.body)['msg']);
     case 500:
       showSnackBar(context, jsonDecode(response.body)['error']);
     case 409:

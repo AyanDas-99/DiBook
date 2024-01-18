@@ -43,7 +43,6 @@ class _OrderCompletedScreenState extends ConsumerState<OrderCompletedScreen> {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      print("useEffect updated..");
       orderReceiptFuture.then((value) {
         setState(() {
           orderReceipt = value;

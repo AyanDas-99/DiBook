@@ -6,7 +6,6 @@ import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
-import 'package:dibook/view/tabs/profile/noti_but.dart';
 import 'package:dibook/view/tabs/profile/screens/books_on_sale/books_on_sale_view.dart';
 import 'package:dibook/view/tabs/profile/screens/components/image_view.dart';
 import 'package:dibook/view/tabs/profile/screens/orders/orders_view.dart';
@@ -218,9 +217,6 @@ class ProfileView extends ConsumerWidget {
                           ],
                         ),
                       ),
-
-                      // Send notification
-                      const NotiBut(),
                     ],
                   ),
                 ),

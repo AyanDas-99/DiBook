@@ -7,11 +7,15 @@ import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await LocalNotifications.init();
+
+  // load .env
+  await dotenv.load(fileName: '.env');
 
   // flutter downloader
   await FlutterDownloader.initialize(

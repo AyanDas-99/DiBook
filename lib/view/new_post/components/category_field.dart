@@ -14,6 +14,12 @@ class _CategoryFieldState extends State<CategoryField> {
   String fieldValue = "";
 
   @override
+  void initState() {
+    fieldValue = widget.controller.text;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
@@ -27,10 +33,6 @@ class _CategoryFieldState extends State<CategoryField> {
           return null;
         },
         value: fieldValue.isNotEmpty ? fieldValue : null,
-        // inputDecorationTheme:
-        //     const InputDecorationTheme(border: InputBorder.none),
-        // hintText: Strings.selectCategory,
-        // controller: widget.controller,
         items: global.Strings.categories
             .map((e) => DropdownMenuItem(
                   value: e,

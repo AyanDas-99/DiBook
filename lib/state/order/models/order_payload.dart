@@ -33,7 +33,7 @@ class OrderPayload extends Equatable {
 
   @override
   String toString() {
-    return "${bookId} : ${quantity} : ${address}";
+    return "$bookId : $quantity : $address";
   }
 
   @override

@@ -25,10 +25,10 @@ class _AnimatedPromptState extends State<AnimatedPrompt>
   @override
   void initState() {
     super.initState();
-    _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
+    _controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 700));
     _yAnimation = Tween<Offset>(
-            begin: const Offset(0, 0), end: Offset(0, -0.23))
+            begin: const Offset(0, 0), end: const Offset(0, -0.23))
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
     _containerScaleAnimation =
         Tween<double>(begin: 2.0, end: 0.4).animate(_controller);

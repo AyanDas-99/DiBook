@@ -1,7 +1,6 @@
 import 'package:dibook/state/books/providers/book_by_id_provider.dart';
 import 'package:dibook/state/cart/providers/update_cart_notifier_provider.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
-import 'package:dibook/state/order/providers/order_notifier_provider.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/order/confirm_address/screens/confirm_address_screen.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
