@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:dibook/state/order/constants/order_status.dart';
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class OrderPayload extends Equatable {
   final String bookId;
   int quantity;
@@ -19,6 +21,7 @@ class OrderPayload extends Equatable {
       'bookId': bookId,
       'quantity': quantity,
       'address': address,
+      'status': OrderStatus.notDispatched.name,
     };
   }
 

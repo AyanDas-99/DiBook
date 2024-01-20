@@ -4,6 +4,7 @@ import 'package:dibook/state/utils/show_snack_bar.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/main_button.dart';
 import 'package:dibook/view/components/shimmer_container.dart';
+import 'package:dibook/view/tabs/profile/screens/orders/components/order_status_view.dart';
 import 'package:dibook/view/theme/theme_constants.dart';
 import 'package:dibook/view/utils/string_shortener.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +153,10 @@ class OrderCard extends ConsumerWidget {
                       ],
                     ),
 
-                    //
+                    // Status Animation
+                    const SizedBox(height: 20),
+                    const Heading(text: "Status", sub: true),
+                    OrderStatusView(order.status),
                   ],
                 ),
               ),

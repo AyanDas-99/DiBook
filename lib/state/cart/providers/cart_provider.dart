@@ -16,6 +16,7 @@ final cartProvider = FutureProvider.autoDispose<Cart>((ref) async {
 
   if (res.statusCode == 200) {
     if (jsonDecode(res.body) == null) {
+      // ignore: prefer_const_literals_to_create_immutables
       return Cart(userId: user.id, items: []);
     }
     final cart = Cart.fromJson(res.body);

@@ -85,10 +85,12 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
                                   .map((e) =>
                                       e.copyWithAddress(widget.customAddress))
                                   .toList());
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => OrderCompletedScreen(
-                              orders: orders,
-                              paymentMethod: paymentMethod.name)));
+                      if (context.mounted) {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => OrderCompletedScreen(
+                                orders: orders,
+                                paymentMethod: paymentMethod.name)));
+                      }
                     }
                   },
                 ),

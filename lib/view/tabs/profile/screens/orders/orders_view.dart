@@ -2,7 +2,7 @@ import 'package:dibook/state/order/providers/all_orders_provider.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
 import 'package:dibook/view/components/heading.dart';
 import 'package:dibook/view/components/shimmer_container.dart';
-import 'package:dibook/view/tabs/profile/screens/orders/order_card.dart';
+import 'package:dibook/view/tabs/profile/screens/orders/components/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

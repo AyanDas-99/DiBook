@@ -10,7 +10,7 @@ const orderRoute = express.Router();
 
 orderRoute.post("/order/place-order", auth, async (req, res) => {
     try {
-        const { bookId, quantity, address } = req.body;
+        const { bookId, quantity, address, status } = req.body;
         console.log(req.body);
 
         let book = await Book.findById(bookId);
@@ -28,7 +28,7 @@ orderRoute.post("/order/place-order", auth, async (req, res) => {
             book_id: bookId,
             quantity: quantity,
             address: address,
-            status: "Not dispatched"
+            status: status 
         });
 
         order = await order.save();

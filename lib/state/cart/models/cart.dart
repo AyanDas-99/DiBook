@@ -9,7 +9,7 @@ class Cart extends Equatable {
   final String userId;
   final List<CartItem> items;
 
-  Cart({required this.userId, required this.items});
+  const Cart({required this.userId, required this.items});
 
   factory Cart.fromMap(Map<String, dynamic> map) {
     return Cart(
@@ -26,7 +26,8 @@ class Cart extends Equatable {
       Cart.fromMap(json.decode(source) as Map<String, dynamic>);
 
   factory Cart.fromOrderPayloadList(String userId, List<OrderPayload> orders) {
-    Cart cart = Cart(userId: userId, items: const []);
+    // ignore: prefer_const_literals_to_create_immutables
+    Cart cart = Cart(userId: userId, items: []); // Do not make the list const
     for (OrderPayload order in orders) {
       cart.items.add(CartItem(bookId: order.bookId, quantity: order.quantity));
     }

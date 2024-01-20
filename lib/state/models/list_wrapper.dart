@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class ListWrapper extends Equatable {
   final List<String> items;
 
-  ListWrapper(this.items);
+  const ListWrapper(this.items);
 
   @override
   List<Object?> get props => [items];

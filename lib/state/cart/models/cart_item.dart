@@ -7,7 +7,7 @@ class CartItem extends Equatable {
   final String bookId;
   final int quantity;
 
-  CartItem({required this.bookId, required this.quantity});
+  const CartItem({required this.bookId, required this.quantity});
 
   factory CartItem.fromMap(Map<String, dynamic> map) {
     return CartItem(

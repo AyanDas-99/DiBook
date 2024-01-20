@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:dibook/state/order/constants/order_keys.dart';
+import 'package:dibook/state/order/constants/order_status.dart';
 import 'package:equatable/equatable.dart';
 
 class Order extends Equatable {
@@ -8,7 +9,7 @@ class Order extends Equatable {
   final String bookId;
   final int quantity;
   final String address;
-  final String status;
+  final OrderStatus status;
   final DateTime createdAt;
 
   const Order(
@@ -39,7 +40,8 @@ class Order extends Equatable {
         bookId: map[OrderKeys.bookId] as String,
         quantity: map[OrderKeys.quantity] as int,
         address: map[OrderKeys.address] as String,
-        status: map[OrderKeys.status] as String,
+        status: OrderStatus.values
+            .firstWhere((element) => element.name == map[OrderKeys.status]),
         createdAt: DateTime.parse(map[OrderKeys.createdAt]));
   }
 
