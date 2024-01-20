@@ -43,14 +43,14 @@ class cloudinaryUtils {
         const parts = url.split('/');
         var indexOfUpload = parts.findIndex((e) => e == 'upload');
         // The public ID is everything after the domain and 'upload/' part
-        const publicId = parts.slice(indexOfUpload+2).join('/').split('.')[0];
+        const publicId = parts.slice(indexOfUpload+2).join('/').split('.')[0].replaceAll("%20", " ");
         return publicId;
     }
     
     static getFolderNameFromPublicId(publicId) {
         const parts = publicId.split('/');
         parts.splice(-1);
-        const folder = parts.join('/');
+        const folder = parts.join('/').replaceAll("%20", " ");
         return folder;
     }
 
