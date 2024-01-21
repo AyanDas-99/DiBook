@@ -8,6 +8,7 @@ const messagesRoute = require('./routes/messages');
 const userRoute = require('./routes/user');
 const cartRoute = require('./routes/cart');
 const orderRoute = require('./routes/order');
+const salesRoute = require('./routes/sales');
 var cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
@@ -41,6 +42,7 @@ app.use(messagesRoute);
 app.use(userRoute);
 app.use(cartRoute);
 app.use(orderRoute);
+app.use(salesRoute);
 
 app.get("/hello", (req, res) => {
     res.send("Unrestricted access denied");
