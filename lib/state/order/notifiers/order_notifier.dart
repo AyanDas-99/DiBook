@@ -1,6 +1,7 @@
 import 'package:dibook/state/auth/constants.dart';
 import 'package:dibook/state/order/models/order.dart';
 import 'package:dibook/state/order/models/order_payload.dart';
+import 'package:dibook/state/sales/providers/sales_notifier_provider.dart';
 import 'package:dibook/state/typedefs/is_loading.dart';
 import 'package:dibook/state/user/provider/user_provider.dart';
 import 'package:dibook/state/utils/http_error_handler.dart';
@@ -51,6 +52,9 @@ class OrderNotifier extends StateNotifier<IsLoading> {
               });
         }
       }
+
+      // Add sales in the background
+      ref.read(salesNotifierProvider.notifier).addNewSale(orders);
     } catch (e) {
       if (context.mounted) {
         showSnackBar(context, e.toString());

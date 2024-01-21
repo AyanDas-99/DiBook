@@ -8,11 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 PreferredSizeWidget customAppbar(BuildContext context,
-    {bool showSearchBar = true, bool leading = false, Widget? leadingWidget}) {
+    {bool showSearchBar = true,
+    bool leading = false,
+    Widget? leadingWidget,
+    bool showAddress = true}) {
   final searchController = TextEditingController();
 
   return PreferredSize(
-    preferredSize: Size.fromHeight(showSearchBar ? 170 : 100),
+    preferredSize: Size.fromHeight(showSearchBar
+        ? 170
+        : showAddress
+            ? 100
+            : 60),
     child: AppBar(
       automaticallyImplyLeading: leading,
       leading: leadingWidget,
@@ -78,32 +85,35 @@ PreferredSizeWidget customAppbar(BuildContext context,
                   },
                 ),
               ),
-            Container(
-              width: double.infinity,
-              color: ThemeConstants.darkGreen,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Consumer(builder: (context, ref, child) {
-                  final user = ref.watch(userProvider);
-                  if (user == null) {
-                    return const Text(
-                      "Login to pick a delivery address",
-                      style: TextStyle(color: Colors.white),
+
+            // Address bar
+            if (showAddress)
+              Container(
+                width: double.infinity,
+                color: ThemeConstants.darkGreen,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Consumer(builder: (context, ref, child) {
+                    final user = ref.watch(userProvider);
+                    if (user == null) {
+                      return const Text(
+                        "Login to pick a delivery address",
+                        style: TextStyle(color: Colors.white),
+                      );
+                    }
+                    if (user.address.isEmpty) {
+                      return const Text(
+                        "Add delivery address in the profile settings",
+                        style: TextStyle(color: Colors.white),
+                      );
+                    }
+                    return Text(
+                      user.address.shorten(40),
+                      style: const TextStyle(color: Colors.white),
                     );
-                  }
-                  if (user.address.isEmpty) {
-                    return const Text(
-                      "Add delivery address in the profile settings",
-                      style: TextStyle(color: Colors.white),
-                    );
-                  }
-                  return Text(
-                    user.address.shorten(40),
-                    style: const TextStyle(color: Colors.white),
-                  );
-                }),
-              ),
-            )
+                  }),
+                ),
+              )
           ],
         ),
       ),

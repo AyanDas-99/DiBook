@@ -28,7 +28,7 @@ class Order extends Equatable {
       OrderKeys.bookId: bookId,
       OrderKeys.quantity: quantity,
       OrderKeys.address: address,
-      OrderKeys.status: status,
+      OrderKeys.status: status.name,
       OrderKeys.createdAt: createdAt.millisecondsSinceEpoch,
     };
   }

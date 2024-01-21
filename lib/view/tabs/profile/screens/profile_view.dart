@@ -8,6 +8,7 @@ import 'package:dibook/view/components/text_and_icon.dart';
 import 'package:dibook/view/new_post/screens/add_new_book_view.dart';
 import 'package:dibook/view/tabs/profile/screens/books_on_sale/books_on_sale_view.dart';
 import 'package:dibook/view/tabs/profile/screens/components/image_view.dart';
+import 'package:dibook/view/tabs/profile/screens/earnings/screens/sales_view.dart';
 import 'package:dibook/view/tabs/profile/screens/orders/orders_view.dart';
 import 'package:dibook/view/tabs/profile/constants.dart';
 import 'package:dibook/view/tabs/profile/screens/user_settings/user_settings_view.dart';
@@ -167,18 +168,26 @@ class ProfileView extends ConsumerWidget {
                         ),
                       ),
                       const Divider(height: 30),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextAndIcon(
-                            text: Constants.earnings,
-                            icon: FontAwesomeIcons.piggyBank,
-                            iconSize: 15,
-                            reversed: true,
-                            space: 20,
-                          ),
-                          const Icon(Icons.arrow_right)
-                        ],
+
+                      // Earnings
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const SalesView()));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextAndIcon(
+                              text: Constants.earnings,
+                              icon: FontAwesomeIcons.piggyBank,
+                              iconSize: 15,
+                              reversed: true,
+                              space: 20,
+                            ),
+                            const Icon(Icons.arrow_right)
+                          ],
+                        ),
                       ),
                       const Divider(height: 30),
                       InkWell(
