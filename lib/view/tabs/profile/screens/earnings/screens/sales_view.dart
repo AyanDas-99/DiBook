@@ -1,30 +1,31 @@
-import 'package:dibook/state/sales/providers/all_sales_provider.dart';
 import 'package:dibook/view/components/custom_appbar.dart';
+import 'package:dibook/view/tabs/profile/screens/earnings/components/all_time_sales.dart';
+import 'package:dibook/view/tabs/profile/screens/earnings/components/gross_sales.dart';
+import 'package:dibook/view/tabs/profile/screens/earnings/components/this_year_sales.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class SalesView extends ConsumerWidget {
+class SalesView extends StatelessWidget {
   const SalesView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final sales = ref.watch(allSalesProvider);
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: customAppbar(context,
-            showSearchBar: false, leading: true, showAddress: false),
-        body: sales.when(
-            data: (sales) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: sales.map((e) => Text(e.id)).toList(),
-                ),
-              );
-            },
-            error: (e, st) => Center(
-                  child: Text(e.toString()),
-                ),
-            loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                )));
+      appBar: customAppbar(context,
+          showAddress: false, showSearchBar: false, leading: true),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GrossSales(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [ThisYearSales(), AllTimeSales()],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
