@@ -12,7 +12,6 @@ final allSalesProvider = FutureProvider.autoDispose<List<Sale>>((ref) async {
   final res = await http.get(Uri.parse("${Constants.baseUrl}/sales/get-sales"),
       headers: {...Constants.contentType, "x-auth-token": user!.token});
 
-  print(jsonDecode(res.body));
   sales = (jsonDecode(res.body) as List).map((e) => Sale.fromMap(e)).toList();
   return sales;
 });

@@ -54,6 +54,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   cloudinary: ^1.2.0
   timeline_tile: ^2.0.0
+  fl_chart: ^0.66.1
 
 dev_dependencies:
   flutter_lints: ^3.0.1
