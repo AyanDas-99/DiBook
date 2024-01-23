@@ -150,7 +150,7 @@ class _MonthlySalesChartState extends ConsumerState<MonthlySalesChart> {
                     child: Row(
                       children: [
                         Text(
-                          "Number of books sold on $selectedYear: ",
+                          "Number of books sold on ${months.entries.firstWhere((element) => element.value == selectedMonth).key}, $selectedYear: ",
                           style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text(totalBooksSold(sales).toString()),
@@ -162,7 +162,7 @@ class _MonthlySalesChartState extends ConsumerState<MonthlySalesChart> {
                     child: Row(
                       children: [
                         Text(
-                          "Total sale on $selectedYear: ",
+                          "Total sale on ${months.entries.firstWhere((element) => element.value == selectedMonth).key}, $selectedYear: ",
                           style: const TextStyle(fontWeight: FontWeight.w500),
                         ),
                         Text("\u{20B9} ${calculateTotal(sales)}"),

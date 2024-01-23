@@ -61,7 +61,7 @@ class _GrossSalesState extends ConsumerState<GrossSales>
   Widget build(BuildContext context) {
     sales = ref.watch(allSalesByYearProvider(selectedYear));
     return SizedBox(
-      height: 320,
+      height: 300,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
