@@ -83,7 +83,7 @@ class BookDetailsView extends ConsumerWidget {
           ),
         ),
         error: (e, _) => Text(e.toString()),
-        loading: () => const CircularProgressIndicator(),
+        loading: () => const Center(child: CircularProgressIndicator()),
       ),
     );
   }

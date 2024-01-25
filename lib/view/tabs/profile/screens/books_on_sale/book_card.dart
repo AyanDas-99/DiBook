@@ -1,6 +1,5 @@
 import 'package:dibook/state/books/models/book.dart';
 import 'package:dibook/state/sales/providers/sale_by_book_id_provider.dart';
-import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/product/components/star_rating.dart';
 import 'package:dibook/view/product/screens/book_details_view.dart';
@@ -14,13 +13,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 class BookCard extends ConsumerWidget {
   const BookCard(this.book, {super.key});
   final Book book;
-
-  void delete(BuildContext context, WidgetRef ref) async {
-    final confirm = await ConfirmDialog.show(
-        context: context, content: "Delete this item?");
-
-    if (confirm == true) {}
-  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

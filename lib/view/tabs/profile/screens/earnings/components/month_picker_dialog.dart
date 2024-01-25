@@ -21,11 +21,9 @@ Future<int?> pickMonth(BuildContext context) async {
     builder: (BuildContext context) {
       return ListView(
         children: months.entries
-            .map((e) => InkWell(
+            .map((e) => ListTile(
+                  title: Text(e.key),
                   onTap: () => Navigator.of(context).pop(e.value),
-                  child: ListTile(
-                    title: Text(e.key),
-                  ),
                 ))
             .toList(),
       );
