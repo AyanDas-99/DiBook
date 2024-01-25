@@ -55,6 +55,8 @@ class _MonthlySalesChartState extends ConsumerState<MonthlySalesChart> {
               child: Heading(text: "Monthly Sales", sub: true),
             ),
 
+            const SizedBox(height: 10),
+
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -77,7 +79,9 @@ class _MonthlySalesChartState extends ConsumerState<MonthlySalesChart> {
                     iconSize: 20,
                   ),
                 ),
+                const SizedBox(width: 10),
                 const Text("Month of "),
+                const SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () async {
                     int? year = await pickYear(context);
@@ -95,6 +99,7 @@ class _MonthlySalesChartState extends ConsumerState<MonthlySalesChart> {
                 ),
               ],
             ),
+            const SizedBox(height: 10),
             // Graph
             sales.when(
                 data: (sales) {

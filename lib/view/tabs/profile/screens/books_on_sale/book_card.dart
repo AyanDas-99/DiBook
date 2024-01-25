@@ -1,4 +1,5 @@
 import 'package:dibook/state/books/models/book.dart';
+import 'package:dibook/state/sales/providers/sale_by_book_id_provider.dart';
 import 'package:dibook/view/components/confirm_dialog.dart';
 import 'package:dibook/view/components/rounded_container.dart';
 import 'package:dibook/view/product/components/star_rating.dart';
@@ -23,6 +24,7 @@ class BookCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final sold = ref.watch(saleByBookIdProvider(book.bookId));
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: RoundedContainer(
@@ -73,9 +75,24 @@ class BookCard extends ConsumerWidget {
                               "Sold: ",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            Text(
-                              book.stock.toString(),
-                            ),
+                            sold.when(
+                                data: (sold) => Text(
+                                      sold.toString(),
+                                    ),
+                                error: (e, st) => Row(
+                                      children: [
+                                        Text(e.toString()),
+                                        IconButton(
+                                            onPressed: () => ref.invalidate(
+                                                saleByBookIdProvider),
+                                            icon: const FaIcon(
+                                              FontAwesomeIcons.rotateLeft,
+                                              size: 15,
+                                            )),
+                                      ],
+                                    ),
+                                loading: () =>
+                                    const CircularProgressIndicator()),
                           ],
                         ),
                         Row(
